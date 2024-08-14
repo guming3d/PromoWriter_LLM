@@ -1,7 +1,7 @@
 import streamlit as st
 
 # Backend function to generate content based on inputs
-def generate_content(user_groups, gender, user_traits, additional_description, generate_number):
+def generate_content(user_groups=[], gender="", user_traits="", additional_description="", generate_number=""):
     # Simulate content generation logic
     content = []
     
@@ -25,11 +25,21 @@ def generate_content(user_groups, gender, user_traits, additional_description, g
 st.set_page_config(layout="wide")
 
 # Title of the app
-st.title("信息输入与生成")
+st.title("卖点生成")
 
 # Left column - Input section
 with st.sidebar:
     st.header("信息输入区")
+
+    # Product Information input
+    st.subheader("产品信息")
+    
+    st.text_input("产品名称", "产品名称")
+    
+    st.text_input('竞品信息', '竞品信息')
+    
+    st.text_area("产品描述", "产品描述", max_chars=1280)
+
 
     # Target User Characteristics
     st.subheader("目标用户特征")
@@ -54,6 +64,10 @@ with st.sidebar:
         # User Traits
         st.write("人群特征")
         user_traits = st.text_input("请选择标签", "")
+    elif target_user_type == "不限":
+        user_groups = []
+        gender = "不限"
+        user_traits = ""
     
     # Generate Number
     st.write("生成数量")
@@ -64,13 +78,19 @@ with st.sidebar:
     additional_description = st.text_area("请输入", "", max_chars=500)
     
     # Buttons
-    st.button("全部清空")
-    st.button("优化内容")
+    # st.button("全部清空")
+    # st.button("优化内容")
     
     # Button for generating content
     if st.button("生成内容"):
         generated_content = generate_content(user_groups, gender, user_traits, additional_description, generate_number)
         st.session_state['generated_content'] = generated_content
+    
+    if st.button("优化内容"):
+        st.session_state['generated_content'] = ""
+        
+    if st.button("全部清空"):
+        st.session_state['generated_content'] = ""
 
 # Right column - Output section
 st.subheader("内容生成区")
@@ -83,5 +103,8 @@ if 'generated_content' in st.session_state:
     for content in st.session_state['generated_content']:
         st.write(content)
 
-retry_button = st.button("再试一次")
+# retry_button = st.button("再试一次")
+
+if st.button("再试一次"):
+    st.session_state['generated_content'] = generate_content(user_groups, gender, user_traits, additional_description, generate_number)
 
