@@ -89,6 +89,9 @@ with st.sidebar:
             background-color: blue;
             color: white;
         }
+        .stButton>button:active {
+            color: yellow;
+        }
         </style>
         """,
         unsafe_allow_html=True
