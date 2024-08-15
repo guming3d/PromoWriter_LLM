@@ -38,11 +38,11 @@ def generate_content_azure(prompt):
     response.raise_for_status()
     return response.json()['choices'][0]['message']['content'].strip()
 
-# Example usage
-if __name__ == "__main__":
-    system_prompt = "Generate marketing content based on the following details."
-    user_input = "Product: XYZ, Target Audience: Tech Enthusiasts, Key Features: Innovative, User-friendly"
-    full_prompt = f"{system_prompt}\n{user_input}"
+#  test usage
+# if __name__ == "__main__":
+#     system_prompt = "Generate marketing content based on the following details."
+#     user_input = "Product: XYZ, Target Audience: Tech Enthusiasts, Key Features: Innovative, User-friendly"
+#     full_prompt = f"{system_prompt}\n{user_input}"
     
-    generated_content = generate_content_azure(full_prompt)
-    print(generated_content)
+#     generated_content = generate_content_azure(full_prompt)
+#     print(generated_content)
