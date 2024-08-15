@@ -26,7 +26,7 @@ def generate_content_azure(prompt):
     response = openai.Completion.create(
         engine=AZURE_OPENAI_DEPLOYMENT_NAME,
         prompt=prompt,
-        max_tokens=150
+        max_tokens=800
     )
     return response.choices[0].text.strip()
 
