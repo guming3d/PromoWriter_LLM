@@ -16,11 +16,14 @@ def check_env_file():
     """
     env_file = find_dotenv()
     if not env_file:
-        return False, """.env file is missing. Please create a .env file with the following content:\n\n
-                       AZURE_OPENAI_ENDPOINT=<your_azure_openai_endpoint>\n
-                       AZURE_OPENAI_DEPLOYMENT_NAME=<your_azure_openai_deployment_name>\n
-                       AZURE_OPENAI_API_KEY=<your_azure_openai_api_key>
-                       """
+        return False, (
+            ".env 文件缺失。请创建一个 .env 文件，并包含以下内容：\n\n"
+            "```\n"
+            "AZURE_OPENAI_ENDPOINT=<your_azure_openai_endpoint>\n"
+            "AZURE_OPENAI_DEPLOYMENT_NAME=<your_azure_openai_deployment_name>\n"
+            "AZURE_OPENAI_API_KEY=<your_azure_openai_api_key>\n"
+            "```\n"
+        )
     
     load_dotenv(env_file)
     
