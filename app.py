@@ -82,6 +82,18 @@ with st.sidebar:
     
     
     # Button for generating content
+    st.markdown(
+        """
+        <style>
+        .stButton>button {
+            background-color: blue;
+            color: white;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
     if st.button("生成内容"):
         # generated_content = generate_content(user_groups, gender, user_traits, additional_description, generate_number)
 
