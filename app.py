@@ -103,11 +103,14 @@ with st.sidebar:
 
     with col1:
         if st.button("生成内容", key="generate_content"):
-            with st.spinner('内容生成中...'):
-                # generated_content = generate_content(user_groups, gender, user_traits, additional_description, generate_number)
-                generated_content = generate_content_azure(full_prompt, user_input)
-                pprint.pprint(generated_content)
-                st.session_state['generated_content'] = generated_content
+            if not product_description.strip():
+                st.error("产品描述不能为空，请输入产品描述。")
+            else:
+                with st.spinner('内容生成中...'):
+                    # generated_content = generate_content(user_groups, gender, user_traits, additional_description, generate_number)
+                    generated_content = generate_content_azure(full_prompt, user_input)
+                    pprint.pprint(generated_content)
+                    st.session_state['generated_content'] = generated_content
 
     with col2:
         if st.button("优化内容", key="optimize_content"):
