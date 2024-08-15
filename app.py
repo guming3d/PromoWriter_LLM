@@ -125,10 +125,7 @@ st.write("生成内容结果")
 if 'generated_content' in st.session_state:
     st.write(st.session_state['generated_content'])
 
-# retry_button = st.button("再试一次")
-
 if st.button("再试一次", key="retry"):
-    if st.button("再试一次"):
-        with st.spinner('内容生成中...'):
-            st.session_state['generated_content'] = generate_content(user_groups, gender, user_traits, additional_description, generate_number)
+    with st.spinner('内容生成中...'):
+        st.session_state['generated_content'] = generate_content(user_groups, gender, user_traits, additional_description, generate_number)
 
