@@ -16,7 +16,7 @@ headers = {
     "api-key": AZURE_OPENAI_API_KEY
 }
 
-def generate_content_azure(prompt):
+def generate_content_azure(system_prompt, user_input):
     """
     Generate content using Azure OpenAI service.
     
@@ -26,11 +26,12 @@ def generate_content_azure(prompt):
     Returns:
         str: The generated content.
     """
+    full_prompt = f"{system_prompt}\n{user_input}"
     url = f"{AZURE_OPENAI_ENDPOINT}/openai/deployments/{AZURE_OPENAI_DEPLOYMENT_NAME}/chat/completions?api-version=2024-02-15-preview"
     payload = {
         "messages": [
             {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": prompt}
+            {"role": "user", "content": full_prompt}
         ],
         "max_tokens": 800
     }

@@ -37,11 +37,11 @@ with st.sidebar:
     # Product Information input
     st.subheader("产品信息")
     
-    st.text_input("产品名称", "产品名称")
+    product_name = st.text_input("产品名称", "产品名称")
     
-    st.text_input('竞品信息', '竞品信息')
+    competitor_info = st.text_input('竞品信息', '竞品信息')
     
-    st.text_area("产品描述", "产品描述", max_chars=1280)
+    product_description = st.text_area("产品描述", "产品描述", max_chars=1280)
 
 
     # Target User Characteristics
@@ -79,6 +79,9 @@ with st.sidebar:
     # Additional Description
     st.write("附加描述")
     additional_description = st.text_area("请输入", "", max_chars=500)
+
+    # Convert collected data to user input string
+    user_input = f"产品: {product_name}, 目标人群: {', '.join(user_groups)}, 性别: {gender}, 特征: {user_traits}, 描述: {product_description}, 附加描述: {additional_description}"
     
     
     # Button for generating content
@@ -103,7 +106,7 @@ with st.sidebar:
         if st.button("生成内容", key="generate_content"):
             with st.spinner('内容生成中...'):
                 # generated_content = generate_content(user_groups, gender, user_traits, additional_description, generate_number)
-                generated_content = generate_content_azure(full_prompt)
+                generated_content = generate_content_azure(full_prompt, user_input)
                 pprint.pprint(generated_content)
                 st.session_state['generated_content'] = generated_content
 
