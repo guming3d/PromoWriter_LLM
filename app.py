@@ -98,10 +98,11 @@ with st.sidebar:
     )
 
     col1, col2, col3 = st.columns(3)
+    content_placeholder = st.empty()
 
     with col1:
         if st.button("生成内容"):
-            with st.spinner('内容生成中...'):
+            with content_placeholder.spinner('内容生成中...'):
                 # generated_content = generate_content(user_groups, gender, user_traits, additional_description, generate_number)
                 generated_content = generate_content_azure(full_prompt)
                 pprint.pprint(generated_content)
@@ -123,7 +124,7 @@ st.write("生成内容结果")
 
 # Retrieve generated content from session state
 if 'generated_content' in st.session_state:
-    st.write(st.session_state['generated_content'])
+    content_placeholder.write(st.session_state['generated_content'])
 
 # retry_button = st.button("再试一次")
 
