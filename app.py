@@ -1,7 +1,7 @@
 import streamlit as st
 from backend import generate_content_azure, env_valid, env_error
 import pprint
-from prompt import full_prompt_1 as full_prompt
+from prompt import system_prompt_1
 
 # Backend function to generate content based on inputs
 def generate_content(user_groups=[], gender="", user_traits="", additional_description="", generate_number=""):
@@ -51,7 +51,7 @@ else:
         # Target User Characteristics
         st.subheader("目标用户特征")
         
-        target_user_type = st.radio("目标用户", ("不限", "自定义用户", "CDP用户"))
+        target_user_type = st.radio("目标用户", ("不限", "自定义用户"))
         
         if target_user_type == "自定义用户":
             
@@ -111,7 +111,7 @@ else:
                     st.session_state['error'] = "产品名称和产品描述都不能为空，请输入产品名称和产品描述。"
                 else:
                     with st.spinner('内容生成中...'):
-                        generated_content = generate_content_azure(full_prompt, user_input)
+                        generated_content = generate_content_azure(system_prompt_1, user_input)
                         pprint.pprint(generated_content)
                         st.session_state['generated_content'] = generated_content
                         st.session_state['error'] = None
@@ -124,20 +124,26 @@ else:
             if st.button("全部清空", key="clear_all"):
                 st.session_state['generated_content'] = ""
 
-# Right column - Output section
-st.subheader("内容生成区")
+    # Right column - Output section
+    st.subheader("内容生成区")
 
-# Display Generated Content
-st.write("生成内容结果")
 
-# Retrieve generated content from session state
-if 'error' in st.session_state and st.session_state['error']:
-    st.error(st.session_state['error'])
+    # Retrieve generated content from session state
+    if 'error' in st.session_state and st.session_state['error']:
+        st.error(st.session_state['error'])
 
-elif 'generated_content' in st.session_state:
-    st.write(st.session_state['generated_content'])
+    elif 'generated_content' in st.session_state:
+        st.write(st.session_state['generated_content'])
 
-if st.button("再试一次", key="retry"):
-    with st.spinner('内容生成中...'):
-        st.session_state['generated_content'] = generate_content(user_groups, gender, user_traits, additional_description, generate_number)
+    if st.button("再试一次", key="retry"):
+        with st.spinner('内容生成中...'):
+            st.session_state['generated_content'] = ""
+            # st.session_state['generated_content'] = generate_content(user_groups, gender, user_traits, additional_description, generate_number)
+            generated_content = generate_content_azure(system_prompt_1, user_input)
+            pprint.pprint(generated_content)
+            st.session_state['generated_content'] = generated_content
+            st.session_state['error'] = None
+            st.write(st.session_state['generated_content'])
+
+
 
