@@ -94,18 +94,23 @@ with st.sidebar:
         unsafe_allow_html=True
     )
 
-    if st.button("生成内容"):
-        # generated_content = generate_content(user_groups, gender, user_traits, additional_description, generate_number)
+    col1, col2, col3 = st.columns(3)
 
-        generated_content = generate_content_azure(full_prompt)
-        pprint.pprint(generated_content)
-        st.session_state['generated_content'] = generated_content
-    
-    if st.button("优化内容"):
-        st.session_state['generated_content'] = ""
-        
-    if st.button("全部清空"):
-        st.session_state['generated_content'] = ""
+    with col1:
+        if st.button("生成内容"):
+            # generated_content = generate_content(user_groups, gender, user_traits, additional_description, generate_number)
+
+            generated_content = generate_content_azure(full_prompt)
+            pprint.pprint(generated_content)
+            st.session_state['generated_content'] = generated_content
+
+    with col2:
+        if st.button("优化内容"):
+            st.session_state['generated_content'] = ""
+
+    with col3:
+        if st.button("全部清空"):
+            st.session_state['generated_content'] = ""
 
 # Right column - Output section
 st.subheader("内容生成区")
