@@ -5,7 +5,7 @@ import pprint
 from prompt import system_prompt_1, system_prompt_2
 
 # Backend function to generate content based on inputs
-def generate_content(user_groups=[], gender="", user_traits="", additional_description="", generate_number=""):
+def generate_content(user_groups=[], gender="", user_traits="", additional_description="", generate_number=1):
     # Simulate content generation logic
     content = []
     
@@ -30,7 +30,6 @@ st.set_page_config(layout="wide")
 
 # Title of the app
 st.title("营销文案生成")
-
 
 # Check if .env file is valid
 if not env_valid:
@@ -80,7 +79,6 @@ else:
         
         product_description = st.text_area("产品描述", product_description_default, max_chars=1280)
 
-
         # Target User Characteristics
         st.subheader("目标用户特征")
         
@@ -118,7 +116,6 @@ else:
 
         # Convert collected data to user input string
         user_input = f"产品: {product_name}, 目标人群: {', '.join(user_groups)}, 性别: {gender}, 目标人群特征: {user_traits}, 产品描述: {product_description}, 附加描述和要求: {additional_description}"
-        
         
         # Button for generating content
         st.markdown(
@@ -164,12 +161,13 @@ else:
         with col3:
             if st.button("全部清空", key="clear_all"):
                 st.session_state['generated_content'] = ""
+                st.session_state['optimized_content'] = ""
+                st.session_state['error'] = None
 
     # Right column - Output section
-    # adding seperator
+    # adding separator
     st.write("---")
     st.subheader("内容生成区")
-
 
     # Retrieve generated content from session state
     if 'error' in st.session_state and st.session_state['error']:
@@ -188,12 +186,8 @@ else:
     if st.button("再试一次", key="retry"):
         with st.spinner('内容生成中...'):
             st.session_state['generated_content'] = ""
-            # st.session_state['generated_content'] = generate_content(user_groups, gender, user_traits, additional_description, generate_number)
             selling_points = generate_content_azure(system_prompt_1, user_input)
             pprint.pprint(selling_points)
             st.session_state['generated_content'] = json.loads(selling_points).get("卖点列表", [])
             st.session_state['error'] = None
             st.table(st.session_state['generated_content'])
-
-
-
