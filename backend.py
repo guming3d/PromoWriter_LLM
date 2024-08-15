@@ -33,6 +33,8 @@ def generate_content_azure(system_prompt, user_input):
             {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": full_prompt}
         ],
+        "temperature": 0.7,
+        "top_p": 0.95,
         "max_tokens": 800
     }
     response = requests.post(url, headers=headers, json=payload)

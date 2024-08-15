@@ -103,8 +103,8 @@ with st.sidebar:
 
     with col1:
         if st.button("生成内容", key="generate_content"):
-            if not product_description.strip():
-                st.session_state['error'] = "产品描述不能为空，请输入产品描述。"
+            if not product_name or not product_description.strip():
+                st.session_state['error'] = "产品名称和产品描述都不能为空，请输入产品名称和产品描述。"
             else:
                 with st.spinner('内容生成中...'):
                     generated_content = generate_content_azure(full_prompt, user_input)
