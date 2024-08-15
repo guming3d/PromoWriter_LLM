@@ -100,7 +100,7 @@ with st.sidebar:
     col1, col2, col3 = st.columns(3)
 
     with col1:
-        if st.button("生成内容"):
+        if st.button("生成内容", key="generate_content"):
             with st.spinner('内容生成中...'):
                 # generated_content = generate_content(user_groups, gender, user_traits, additional_description, generate_number)
                 generated_content = generate_content_azure(full_prompt)
@@ -108,11 +108,11 @@ with st.sidebar:
                 st.session_state['generated_content'] = generated_content
 
     with col2:
-        if st.button("优化内容"):
+        if st.button("优化内容", key="optimize_content"):
             st.session_state['generated_content'] = ""
 
     with col3:
-        if st.button("全部清空"):
+        if st.button("全部清空", key="clear_all"):
             st.session_state['generated_content'] = ""
 
 # Right column - Output section
@@ -127,7 +127,7 @@ if 'generated_content' in st.session_state:
 
 # retry_button = st.button("再试一次")
 
-if st.button("再试一次"):
+if st.button("再试一次", key="retry"):
     if st.button("再试一次"):
         with st.spinner('内容生成中...'):
             st.session_state['generated_content'] = generate_content(user_groups, gender, user_traits, additional_description, generate_number)
