@@ -2,13 +2,47 @@ import os
 import requests
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
-load_dotenv()
+import os
+import requests
+from dotenv import load_dotenv, find_dotenv
 
-# Read Azure OpenAI credentials from environment variables
-AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
-AZURE_OPENAI_DEPLOYMENT_NAME = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
-AZURE_OPENAI_API_KEY = os.getenv("AZURE_OPENAI_API_KEY")
+def check_env_file():
+    """
+    Check if .env file exists and contains required parameters.
+    
+    Returns:
+        bool: True if .env file exists and contains required parameters, False otherwise.
+        str: Error message if .env file is missing or incomplete.
+    """
+    env_file = find_dotenv()
+    if not env_file:
+        return False, ".env file is missing."
+    
+    load_dotenv(env_file)
+    
+    required_vars = ["AZURE_OPENAI_ENDPOINT", "AZURE_OPENAI_DEPLOYMENT_NAME", "AZURE_OPENAI_API_KEY"]
+    missing_vars = [var for var in required_vars if not os.getenv(var)]
+    
+    if missing_vars:
+        return False, f"Missing required parameters in .env file: {', '.join(missing_vars)}"
+    
+    return True, ""
+
+# Check .env file
+env_valid, env_error = check_env_file()
+
+if env_valid:
+    # Load environment variables from .env file
+    load_dotenv()
+
+    # Read Azure OpenAI credentials from environment variables
+    AZURE_OPENAI_ENDPOINT = os.getenv("AZURE_OPENAI_ENDPOINT")
+    AZURE_OPENAI_DEPLOYMENT_NAME = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
+    AZURE_OPENAI_API_KEY = os.getenv("AZURE_OPENAI_API_KEY")
+else:
+    AZURE_OPENAI_ENDPOINT = None
+    AZURE_OPENAI_DEPLOYMENT_NAME = None
+    AZURE_OPENAI_API_KEY = None
 
 # Set the headers for the API request
 headers = {
