@@ -1,6 +1,7 @@
 import streamlit as st
 from backend import generate_content_azure
 import pprint
+from prompt import full_prompt
 
 # Backend function to generate content based on inputs
 def generate_content(user_groups=[], gender="", user_traits="", additional_description="", generate_number=""):
@@ -83,7 +84,6 @@ with st.sidebar:
     # Button for generating content
     if st.button("生成内容"):
         # generated_content = generate_content(user_groups, gender, user_traits, additional_description, generate_number)
-        from prompt import full_prompt
 
         generated_content = generate_content_azure(full_prompt)
         pprint.pprint(generated_content)
