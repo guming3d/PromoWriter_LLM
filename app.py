@@ -1,4 +1,6 @@
 import streamlit as st
+from backend import generate_content_azure
+import pprint
 
 # Backend function to generate content based on inputs
 def generate_content(user_groups=[], gender="", user_traits="", additional_description="", generate_number=""):
@@ -77,13 +79,16 @@ with st.sidebar:
     st.write("附加描述")
     additional_description = st.text_area("请输入", "", max_chars=500)
     
-    # Buttons
-    # st.button("全部清空")
-    # st.button("优化内容")
     
     # Button for generating content
     if st.button("生成内容"):
-        generated_content = generate_content(user_groups, gender, user_traits, additional_description, generate_number)
+        # generated_content = generate_content(user_groups, gender, user_traits, additional_description, generate_number)
+        system_prompt = "Generate marketing content based on the following details."
+        user_input = "Product: XYZ, Target Audience: Tech Enthusiasts, Key Features: Innovative, User-friendly"
+        full_prompt = f"{system_prompt}\n{user_input}"
+
+        generated_content = generate_content_azure(full_prompt)
+        pprint.pprint(generated_content)
         st.session_state['generated_content'] = generated_content
     
     if st.button("优化内容"):
@@ -100,8 +105,7 @@ st.write("生成内容结果")
 
 # Retrieve generated content from session state
 if 'generated_content' in st.session_state:
-    for content in st.session_state['generated_content']:
-        st.write(content)
+    st.write(st.session_state['generated_content'])
 
 # retry_button = st.button("再试一次")
 
