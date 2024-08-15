@@ -1,4 +1,5 @@
 import streamlit as st
+import json
 from backend import generate_content_azure, env_valid, env_error
 import pprint
 from prompt import system_prompt_1
@@ -113,7 +114,7 @@ else:
                     with st.spinner('内容生成中...'):
                         generated_content = generate_content_azure(system_prompt_1, user_input)
                         pprint.pprint(generated_content)
-                        st.session_state['generated_content'] = generated_content
+                        st.session_state['generated_content'] = json.loads(generated_content)
                         st.session_state['error'] = None
 
         with col2:
@@ -133,7 +134,7 @@ else:
         st.error(st.session_state['error'])
 
     elif 'generated_content' in st.session_state:
-        st.write(st.session_state['generated_content'])
+        st.table(st.session_state['generated_content'])
 
     if st.button("再试一次", key="retry"):
         with st.spinner('内容生成中...'):
@@ -143,7 +144,7 @@ else:
             pprint.pprint(generated_content)
             st.session_state['generated_content'] = generated_content
             st.session_state['error'] = None
-            st.write(st.session_state['generated_content'])
+            st.table(st.session_state['generated_content'])
 
 
 
