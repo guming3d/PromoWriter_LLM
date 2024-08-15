@@ -42,11 +42,42 @@ else:
         # Product Information input
         st.subheader("产品信息")
         
-        product_name = st.text_input("产品名称", "产品名称")
+        product_name = st.text_input("产品名称", "海信空调")
         
         competitor_info = st.text_input('竞品信息', '竞品信息')
+
+        product_description_default = """
+        产品概述
+品牌: 海信 (Hisense)
+型号: KFR-35GW/A820-X1 (A型号)
+主要特点和技术
+舒适性和制冷能力:
+
+制冷性能: 这款空调设计用于提供高效制冷，可能在极端条件下也能表现出色。
+智能控制: 具备智能控制功能，可以通过应用程序进行远程操作，并支持语音控制集成。
+精准温控: 设计用于精确的温度调节，以实现最佳的舒适度。
+节能效能:
+
+节能特点: 该空调被宣传为高度节能，能够有效降低电费支出。
+健康相关功能:
+
+空气质量提升: 产品可能包括旨在改善室内空气质量的技术，例如过滤或净化功能。
+环保: 强调环保操作，可能涉及其制冷剂或整体能耗。
+设计与构造:
+
+时尚设计: 空调具有现代感和时尚的设计，适用于多种室内装饰风格。
+耐用性: 可能采用确保长久使用的材料或技术，能够在恶劣环境中也能稳定运行。
+用户体验:
+
+静音运行: 注重低噪音设计，适合卧室或其他安静空间使用。
+便利性: 宣传易于安装和用户友好的界面，可能包括便捷的维护功能。
+其他信息
+推广内容: 页面可能还包括客户评价、产品视频或互动元素，以展示空调的各项功能。
+技术规格: 图片的最后部分包含一个技术规格表，列出了如功耗、制冷能力、尺寸等详细规格。
+整个页面的设计目的是全面介绍这款空调，强调其先进功能、用户利益，以及适用于各种生活环境的特点。
+        """
         
-        product_description = st.text_area("产品描述", "产品描述", max_chars=1280)
+        product_description = st.text_area("产品描述", product_description_default, max_chars=1280)
 
 
         # Target User Characteristics
@@ -114,7 +145,7 @@ else:
                     with st.spinner('内容生成中...'):
                         generated_content = generate_content_azure(system_prompt_1, user_input)
                         pprint.pprint(generated_content)
-                        st.session_state['generated_content'] = json.loads(generated_content)
+                        st.session_state['generated_content'] = json.loads(generated_content).get("卖点列表", [])
                         st.session_state['error'] = None
 
         with col2:
@@ -142,7 +173,7 @@ else:
             # st.session_state['generated_content'] = generate_content(user_groups, gender, user_traits, additional_description, generate_number)
             generated_content = generate_content_azure(system_prompt_1, user_input)
             pprint.pprint(generated_content)
-            st.session_state['generated_content'] = generated_content
+            st.session_state['generated_content'] = json.loads(generated_content).get("卖点列表", [])
             st.session_state['error'] = None
             st.table(st.session_state['generated_content'])
 
