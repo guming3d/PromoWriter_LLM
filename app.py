@@ -101,11 +101,10 @@ with st.sidebar:
 
     with col1:
         if st.button("生成内容"):
-            with st.spinner('内容生成中...'):
-                # generated_content = generate_content(user_groups, gender, user_traits, additional_description, generate_number)
-                generated_content = generate_content_azure(full_prompt)
-                pprint.pprint(generated_content)
-                st.session_state['generated_content'] = generated_content
+            # generated_content = generate_content(user_groups, gender, user_traits, additional_description, generate_number)
+            generated_content = generate_content_azure(full_prompt)
+            pprint.pprint(generated_content)
+            st.session_state['generated_content'] = generated_content
 
     with col2:
         if st.button("优化内容"):
@@ -123,7 +122,8 @@ st.write("生成内容结果")
 
 # Retrieve generated content from session state
 if 'generated_content' in st.session_state:
-    st.write(st.session_state['generated_content'])
+    with st.spinner('内容生成中...'):
+        st.write(st.session_state['generated_content'])
 
 # retry_button = st.button("再试一次")
 
