@@ -50,7 +50,6 @@ with st.sidebar:
     target_user_type = st.radio("目标用户", ("不限", "自定义用户", "CDP用户"))
     
     if target_user_type == "自定义用户":
-        st.checkbox("目标用户")
         
         # User Groups
         st.write("人群圈层")
@@ -81,7 +80,7 @@ with st.sidebar:
     additional_description = st.text_area("请输入", "", max_chars=500)
 
     # Convert collected data to user input string
-    user_input = f"产品: {product_name}, 目标人群: {', '.join(user_groups)}, 性别: {gender}, 特征: {user_traits}, 描述: {product_description}, 附加描述: {additional_description}"
+    user_input = f"产品: {product_name}, 目标人群: {', '.join(user_groups)}, 性别: {gender}, 目标人群特征: {user_traits}, 产品描述: {product_description}, 附加描述和要求: {additional_description}"
     
     
     # Button for generating content
