@@ -29,7 +29,8 @@ def generate_content(user_groups=[], gender="", user_traits="", additional_descr
 st.set_page_config(layout="wide")
 
 # Title of the app
-st.title("卖点生成")
+st.title("营销文案生成")
+
 
 # Check if .env file is valid
 if not env_valid:
@@ -138,26 +139,26 @@ else:
         col1, col2, col3 = st.columns(3)
 
         with col1:
-            if st.button("生成内容", key="generate_content"):
+            if st.button("生成卖点", key="generate_content"):
                 if not product_name or not product_description.strip():
                     st.session_state['error'] = "产品名称和产品描述都不能为空，请输入产品名称和产品描述。"
                 else:
-                    with st.spinner('内容生成中...'):
+                    with st.spinner('卖点生成中......'):
                         selling_points = generate_content_azure(system_prompt_1, user_input)
                         pprint.pprint(selling_points)
                         st.session_state['generated_content'] = json.loads(selling_points).get("卖点列表", [])
                         st.session_state['error'] = None
 
         with col2:
-            if st.button("优化内容", key="optimize_content"):
+            if st.button("优化卖点", key="optimize_content"):
                 if 'generated_content' not in st.session_state or not st.session_state['generated_content']:
-                    st.session_state['error'] = "请先点击“生成内容”按钮生成卖点。"
+                    st.session_state['error'] = "请先点击“生成卖点”按钮生成卖点。"
                 else:
-                    with st.spinner('内容优化中...'):
+                    with st.spinner('卖点优化中......'):
                         selling_points = st.session_state['generated_content']
                         optimized_content = generate_content_azure(system_prompt_2, json.dumps(selling_points, ensure_ascii=False))
                         pprint.pprint(optimized_content)
-                        st.session_state['generated_content'] = json.loads(optimized_content).get("卖点列表", [])
+                        st.session_state['optimized_content'] = json.loads(optimized_content).get("卖点列表", [])
                         st.session_state['error'] = None
 
         with col3:
@@ -165,6 +166,8 @@ else:
                 st.session_state['generated_content'] = ""
 
     # Right column - Output section
+    # adding seperator
+    st.write("---")
     st.subheader("内容生成区")
 
 
@@ -172,8 +175,15 @@ else:
     if 'error' in st.session_state and st.session_state['error']:
         st.error(st.session_state['error'])
 
-    elif 'generated_content' in st.session_state:
+    elif 'generated_content' in st.session_state and not 'optimized_content' in st.session_state:
         st.table(st.session_state['generated_content'])
+
+    elif 'optimized_content' in st.session_state:
+        st.write("原始的卖点：")
+        st.table(st.session_state['generated_content'])
+        st.write("---")
+        st.write("优化后的卖点：")
+        st.table(st.session_state['optimized_content'])
 
     if st.button("再试一次", key="retry"):
         with st.spinner('内容生成中...'):

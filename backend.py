@@ -76,7 +76,10 @@ def generate_content_azure(system_prompt, user_input):
         ],
         "temperature": 0.7,
         "top_p": 0.95,
-        "max_tokens": 800
+        "max_tokens": 800,
+        "response_format": {
+            "type": "json_object"
+            }
     }
     response = requests.post(url, headers=headers, json=payload)
     response.raise_for_status()
