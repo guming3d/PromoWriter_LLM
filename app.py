@@ -150,7 +150,15 @@ else:
 
         with col2:
             if st.button("优化内容", key="optimize_content"):
-                st.session_state['generated_content'] = ""
+                if 'generated_content' not in st.session_state or not st.session_state['generated_content']:
+                    st.session_state['error'] = "请先点击“生成内容”按钮生成卖点。"
+                else:
+                    with st.spinner('内容优化中...'):
+                        selling_points = st.session_state['generated_content']
+                        optimized_content = generate_content_azure(system_prompt_2, json.dumps(selling_points, ensure_ascii=False))
+                        pprint.pprint(optimized_content)
+                        st.session_state['generated_content'] = json.loads(optimized_content).get("卖点列表", [])
+                        st.session_state['error'] = None
 
         with col3:
             if st.button("全部清空", key="clear_all"):
