@@ -2,7 +2,7 @@ import streamlit as st
 import json
 from backend import generate_content_azure, env_valid, env_error
 import pprint
-from prompt import system_prompt_1
+from prompt import system_prompt_1, system_prompt_2
 
 # Backend function to generate content based on inputs
 def generate_content(user_groups=[], gender="", user_traits="", additional_description="", generate_number=""):
