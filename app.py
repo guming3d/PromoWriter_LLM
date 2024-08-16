@@ -4,9 +4,6 @@ from backend import generate_content_azure, env_valid, env_error
 import pprint
 from prompt import system_prompt_1, system_prompt_2
 
-with open("images/hisence_logo.jpeg", "rb") as f:
-    hisence_logo = f.read()
-
 with open("images/Microsoft_Azure.svg", "r") as f:
     azure_logo = f.read()
 
@@ -34,9 +31,6 @@ def generate_content(user_groups=[], gender="", user_traits="", additional_descr
 # Set page configuration
 st.set_page_config(layout="wide")
 
-# Title of the app
-# st.title("营销文案生成")
-# st.logo(azure_logo)
 
 # Check if .env file is valid
 if not env_valid:
@@ -44,7 +38,6 @@ if not env_valid:
 else:
     # Left column - Input section
     with st.sidebar:
-        st.image(hisence_logo, use_column_width=True)
         st.logo(azure_logo)
         st.title("营销文案生成")
         st.header("信息输入区")
