@@ -135,6 +135,9 @@ else:
                 cursor: pointer;
                 border-radius: 12px;
             }
+            .stButton>button:active {
+                color: black;
+            }
             .stButton>button:hover {
                 background-color: white;
                 color: black;
