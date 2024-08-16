@@ -118,7 +118,7 @@ else:
         additional_description = st.text_area("请输入", "", max_chars=500)
 
         # Convert collected data to user input string
-        user_input = f"产品: {product_name}, 目标人群: {', '.join(user_groups)}, 性别: {gender}, 目标人群特征: {user_traits}, 产品描述: {product_description}, 附加描述和要求: {additional_description}"
+        user_input = f"产品名称: {product_name}, 目标人群: {', '.join(user_groups)}, 性别: {gender}, 目标人群特征: {user_traits}, 产品描述: {product_description}, 附加描述和要求: {additional_description} \n 生成卖点的数量: {generate_number}"
         
         # Button for generating content
         st.markdown(
