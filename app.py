@@ -160,9 +160,12 @@ else:
 
         with col3:
             if st.button("全部清空", key="clear_all"):
-                st.session_state['generated_content'] = ""
-                st.session_state['optimized_content'] = ""
-                st.session_state['error'] = None
+                if 'generated_content' in st.session_state:
+                    del st.session_state['generated_content']
+                if 'optimized_content' in st.session_state:
+                    del st.session_state['optimized_content']
+                if 'error' in st.session_state:
+                    del st.session_state['error']
 
     # Right column - Output section
     # adding separator
