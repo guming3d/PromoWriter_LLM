@@ -67,14 +67,13 @@ def generate_content_azure(system_prompt, user_input):
     Returns:
         str: The generated content.
     """
-    full_prompt = f"{system_prompt}\n{user_input}"
     url = f"{AZURE_OPENAI_ENDPOINT}/openai/deployments/{AZURE_OPENAI_DEPLOYMENT_NAME}/chat/completions?api-version=2024-02-15-preview"
     payload = {
         "messages": [
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": full_prompt}
+            {"role": "system", "content": f"{system_prompt}"},
+            {"role": "user", "content": f"{user_input}"}
         ],
-        "temperature": 0.7,
+        "temperature": 0.4,
         "top_p": 0.95,
         "max_tokens": 800,
         "response_format": {
