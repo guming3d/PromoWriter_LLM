@@ -32,7 +32,8 @@ def generate_content(user_groups=[], gender="", user_traits="", additional_descr
 st.set_page_config(layout="wide")
 
 # Title of the app
-st.title("营销文案生成")
+# st.title("营销文案生成")
+# st.logo(azure_logo)
 
 # Check if .env file is valid
 if not env_valid:
@@ -41,6 +42,7 @@ else:
     # Left column - Input section
     with st.sidebar:
         st.logo(azure_logo)
+        st.title("营销文案生成")
         st.header("信息输入区")
 
         # Product Information input
@@ -190,8 +192,8 @@ else:
 
     # Right column - Output section
     # adding separator
+    st.title("内容生成区")
     st.write("---")
-    st.subheader("内容生成区")
 
     # Retrieve generated content from session state
     if 'error' in st.session_state and st.session_state['error']:
