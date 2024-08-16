@@ -39,7 +39,7 @@ else:
     # Left column - Input section
     with st.sidebar:
         st.logo(azure_logo)
-        st.title("营销文案生成")
+        st.markdown("<h1 style='color: #00008B;'>营销文案生成</h1>", unsafe_allow_html=True)
         st.header("信息输入区")
 
         # Product Information input
