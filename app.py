@@ -143,7 +143,8 @@ else:
                     with st.spinner('卖点生成中......'):
                         selling_points = generate_content_azure(system_prompt_1, user_input)
                         pprint.pprint(selling_points)
-                        st.session_state['generated_content'] = json.loads(selling_points).get("卖点列表", [])
+                        response_json = json.loads(selling_points)
+                        st.session_state['generated_content'] = response_json.get("卖点列表", [response_json])
                         st.session_state['error'] = None
 
         with col2:
@@ -155,7 +156,8 @@ else:
                         selling_points = st.session_state['generated_content']
                         optimized_content = generate_content_azure(system_prompt_2, json.dumps(selling_points, ensure_ascii=False))
                         pprint.pprint(optimized_content)
-                        st.session_state['optimized_content'] = json.loads(optimized_content).get("卖点列表", [])
+                        response_json = json.loads(optimized_content)
+                        st.session_state['optimized_content'] = response_json.get("卖点列表", [response_json])
                         st.session_state['error'] = None
 
         with col3:
