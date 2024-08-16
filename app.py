@@ -192,6 +192,7 @@ else:
     # Right column - Output section
     # adding separator
     st.title("内容生成区")
+    st.logo(azure_logo)
     st.write("---")
 
     # Retrieve generated content from session state

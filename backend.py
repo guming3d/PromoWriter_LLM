@@ -73,9 +73,9 @@ def generate_content_azure(system_prompt, user_input):
             {"role": "system", "content": f"{system_prompt}"},
             {"role": "user", "content": f"{user_input}"}
         ],
-        "temperature": 0.4,
+        "temperature": 0.6,
         "top_p": 0.95,
-        "max_tokens": 800,
+        "max_tokens": 600,
         "response_format": {
             "type": "json_object"
             }
