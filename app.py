@@ -4,6 +4,9 @@ from backend import generate_content_azure, env_valid, env_error
 import pprint
 from prompt import system_prompt_1, system_prompt_2
 
+with open("images/Microsoft_Azure.svg", "r") as f:
+    azure_logo = f.read()
+
 # Backend function to generate content based on inputs
 def generate_content(user_groups=[], gender="", user_traits="", additional_description="", generate_number=1):
     # Simulate content generation logic
@@ -37,6 +40,7 @@ if not env_valid:
 else:
     # Left column - Input section
     with st.sidebar:
+        st.logo(azure_logo)
         st.header("信息输入区")
 
         # Product Information input
