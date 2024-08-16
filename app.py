@@ -122,11 +122,23 @@ else:
             """
             <style>
             .stButton>button {
-                background-color: blue;
+                background-color: #4CAF50; /* Green */
+                border: none;
                 color: white;
+                padding: 10px 24px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                transition-duration: 0.4s;
+                cursor: pointer;
+                border-radius: 12px;
             }
-            .stButton>button:active {
-                color: yellow;
+            .stButton>button:hover {
+                background-color: white;
+                color: black;
+                border: 2px solid #4CAF50;
             }
             </style>
             """,
