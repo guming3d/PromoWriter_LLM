@@ -122,7 +122,7 @@ else:
             """
             <style>
             .stButton>button {
-                background-color: #ADD8E6; /* Light Blue */
+                background-color: #5F9EA0; /* Darker Blue */
                 border: none;
                 color: white;
                 padding: 10px 24px;
