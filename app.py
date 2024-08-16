@@ -122,7 +122,7 @@ else:
             """
             <style>
             .stButton>button {
-                background-color: #4CAF50; /* Green */
+                background-color: #ADD8E6; /* Light Blue */
                 border: none;
                 color: white;
                 padding: 10px 24px;
@@ -138,7 +138,7 @@ else:
             .stButton>button:hover {
                 background-color: white;
                 color: black;
-                border: 2px solid #4CAF50;
+                border: 2px solid #ADD8E6;
             }
             </style>
             """,
