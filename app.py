@@ -28,8 +28,10 @@ def generate_content(user_groups=[], gender="", user_traits="", additional_descr
     
     return content
 
-# Set page configuration
-st.set_page_config(layout="wide")
+st.set_page_config(
+    page_title="海信国内营销AI文案生成平台",
+    layout="wide",  # You can also choose 'wide'
+)
 
 
 # Check if .env file is valid
@@ -47,12 +49,12 @@ else:
         # Product Information input
         st.subheader("产品信息")
         
-        product_name = st.text_input("产品名称", "海信空调")
+        product_name = st.text_input("产品名称", "海信小哈利洗衣机")
         
         competitor_info = st.text_input('竞品信息', '竞品信息')
 
-        product_description_default = """
-        产品概述
+        product_description_default_backup = """
+产品概述
 品牌: 海信 (Hisense)
 型号: KFR-35GW/A820-X1 (A型号)
 主要特点和技术
@@ -81,6 +83,13 @@ else:
 技术规格: 图片的最后部分包含一个技术规格表，列出了如功耗、制冷能力、尺寸等详细规格。
 整个页面的设计目的是全面介绍这款空调，强调其先进功能、用户利益，以及适用于各种生活环境的特点。
         """
+        product_description_default = """
+产品概述
+品牌: 海信 (Hisense)
+型号: 海信小哈利洗衣机
+核心品类联想词/洗衣机营销关键词：小哈利=母婴迷你洗衣机=能除毛屑的洗衣机=活水洗更健康
+        
+        """
         
         product_description = st.text_area("产品描述", product_description_default, max_chars=1280)
 
@@ -95,7 +104,7 @@ else:
             st.write("人群圈层")
             user_groups = st.multiselect(
                 "选择人群圈层", 
-                ["游戏圈层", "科技圈层", "家装圈层", "体育圈层"],
+                ["游戏圈层", "科技圈层", "家装圈层", "体育圈层","精致妈妈","萌宠人群","年龄段18-24岁","年龄段24-35岁","年龄段35-45岁","年龄段45-55岁","年龄段55岁以上"],
                 ["体育圈层"]
             )
             
