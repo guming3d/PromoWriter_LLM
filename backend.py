@@ -80,6 +80,7 @@ def generate_content_azure(system_prompt, user_input):
             "type": "json_object"
             }
     }
+    print(payload)
     response = requests.post(url, headers=headers, json=payload)
     response.raise_for_status()
     return response.json()['choices'][0]['message']['content'].strip()
