@@ -265,17 +265,21 @@ else:
 
     elif 'generated_content' in st.session_state:
         st.write("原始的卖点：")
-        st.write(st.session_state['generated_content'])
+        if 'generated_content' in st.session_state:
+            st.write(st.session_state['generated_content'])
         st.write("---")
         if 'short_content' in st.session_state:
             st.write("短文案：")
-            st.write(st.session_state['short_content'])
+            if 'short_content' in st.session_state:
+                st.write(st.session_state['short_content'])
             st.write("---")
         if 'long_content' in st.session_state:
             st.write("长文案：")
-            st.write(st.session_state['long_content'])
+            if 'long_content' in st.session_state:
+                st.write(st.session_state['long_content'])
             st.write("---")
             st.write("优化后的卖点：")
-            st.write(st.session_state['optimized_content'])
+            if 'optimized_content' in st.session_state:
+                st.write(st.session_state['optimized_content'])
     
 
