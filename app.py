@@ -201,14 +201,14 @@ else:
                     st.session_state['error'] = "产品名称和产品描述都不能为空，请输入产品名称和产品描述。"
                 else:
                     with st.spinner('卖点生成中......'):
-                        pprint.pprint('--------------->>INPUT START<<--------------------')
+                        print('--------------->>INPUT START<<--------------------')
                         print(system_prompt_1)
                         print(user_input)
-                        pprint.pprint('--------------->>INPUT END<<--------------------')
+                        print('--------------->>INPUT END<<--------------------\n')
                         selling_points = generate_content_azure(system_prompt_1, user_input)
-                        pprint.pprint('--------------->>OUTPUT START<<--------------------')
+                        print('--------------->>OUTPUT START<<--------------------')
                         print(selling_points)
-                        pprint.pprint('--------------->>OUTPUT END<<--------------------')
+                        print('--------------->>OUTPUT END<<--------------------\n')
                         response_json = json.loads(selling_points)
                         st.session_state['generated_content'] = response_json.get("卖点") or response_json.get("卖点列表", [response_json])
                         st.session_state['error'] = None
@@ -232,8 +232,16 @@ else:
                 else:
                     with st.spinner('短文案生成中......'):
                         selling_points = st.session_state['generated_content']
+                        print('--------------->>INPUT START<<--------------------')
+                        print(system_prompt_short_generation)
+                        print(selling_points)
+                        print('--------------->>INPUT END<<--------------------\n')
+
                         short_content = generate_content_azure(system_prompt_short_generation, "卖点信息如下:" + str(selling_points))
-                        pprint.pprint(short_content)
+                        print('--------------->>OUTPUT START<<--------------------')
+                        print(short_content)
+                        print('--------------->>OUTPUT END<<--------------------\n')
+
                         response_json = json.loads(short_content)
                         st.session_state['short_content'] = response_json.get("短文案", [response_json])
 
@@ -244,8 +252,19 @@ else:
                     with st.spinner('长文案生成中......'):
                         selling_points = st.session_state['generated_content']
                         short_content = st.session_state['short_content']
+
+                        print('--------------->>INPUT START<<--------------------')
+                        print(system_prompt_long_generation)
+                        print(short_content)
+                        print('--------------->>INPUT END<<--------------------\n')
+
+
                         long_content = generate_content_azure(system_prompt_long_generation, "卖点信息如下:" + str(selling_points) + "\n短文案信息如下:" + str(short_content))
-                        pprint.pprint(long_content)
+                        print('--------------->>OUTPUT START<<--------------------')
+                        print(long_content)
+                        print('--------------->>OUTPUT END<<--------------------\n')
+
+
                         response_json = json.loads(long_content)
                         st.session_state['long_content'] = response_json.get("长文案", [response_json])
 
@@ -267,20 +286,24 @@ else:
     elif 'generated_content' in st.session_state:
         st.write("卖点：")
         if 'generated_content' in st.session_state:
-            st.write(st.session_state['generated_content'])
+            with st.container(border=True):
+                st.write(st.session_state['generated_content'])
         if 'short_content' in st.session_state:
             st.write("---")
-            st.write("短文案：")
-            st.write(st.session_state['short_content'])
+            with st.container(border=True):
+                st.write("短文案：")
+                st.write(st.session_state['short_content'])
         if 'long_content' in st.session_state:
             st.write("---")
-            st.write("长文案：")
-            st.write(st.session_state['long_content'])
+            with st.container(border=True):
+                st.write("长文案：")
+                st.write(st.session_state['long_content'])
         if 'optimized_content' in st.session_state:
             st.write("---")
-            st.write("原始卖点：")
-            st.write(selling_points)
-            st.write("优化后的卖点：")
-            st.write(st.session_state['optimized_content'])
+            with st.container(border=True):
+                st.write("原始卖点：")
+                st.write(selling_points)
+                st.write("优化后的卖点：")
+                st.write(st.session_state['optimized_content'])
     
 
