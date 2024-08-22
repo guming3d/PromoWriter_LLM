@@ -232,7 +232,7 @@ else:
                 else:
                     with st.spinner('短文案生成中......'):
                         print(st.session_state['generated_content'])
-                        short_content = generate_content_azure(system_prompt_short_generation, st.session_state['generated_content'])
+                        short_content = generate_content_azure(system_prompt_short_generation, json.dumps(st.session_state['generated_content'], ensure_ascii=False))
                         pprint.pprint(short_content)
                         response_json = json.loads(short_content)
                         st.session_state['short_content'] = response_json.get("短文案", [response_json])
