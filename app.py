@@ -232,7 +232,11 @@ else:
                 else:
                     with st.spinner('短文案生成中......'):
                         selling_points = st.session_state['generated_content']
-                        short_content = generate_content_azure(system_prompt_short_generation, json.dumps(selling_points, ensure_ascii=False))
+                        # Convert selling points to markdown format
+                        selling_points_markdown = "\n".join(
+                            [f"**核心卖点**: {point['核心卖点']}\n**用户利益点描述**: {point['用户利益点描述']}\n**生成卖点逻辑**: {point['生成卖点逻辑']}\n" for point in selling_points]
+                        )
+                        short_content = generate_content_azure(system_prompt_short_generation, selling_points_markdown)
                         pprint.pprint(short_content)
                         response_json = json.loads(short_content)
                         st.session_state['short_content'] = response_json.get("短文案", [response_json])
