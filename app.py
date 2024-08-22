@@ -2,7 +2,7 @@ import streamlit as st
 import json
 from backend import generate_content_azure, env_valid, env_error
 import pprint
-from prompt import system_prompt_1, system_prompt_2, system_prompt_short_generation
+from prompt import system_prompt_1, system_prompt_2, system_prompt_short_generation, system_prompt_long_generation
 
 with open("images/Microsoft_Azure.svg", "r") as f:
     azure_logo = f.read()
@@ -237,7 +237,16 @@ else:
                         response_json = json.loads(short_content)
                         st.session_state['short_content'] = response_json.get("短文案", [response_json])
 
-            if st.button("全部清空", key="clear_all"):
+            if st.button("生成长文案", key="generate_long_content"):
+                if 'generated_content' not in st.session_state or not st.session_state['generated_content']:
+                    st.session_state['error'] = "请先点击“生成卖点”按钮生成卖点。"
+                else:
+                    with st.spinner('长文案生成中......'):
+                        selling_points = st.session_state['generated_content']
+                        long_content = generate_content_azure(system_prompt_long_generation, "卖点信息如下:" + str(selling_points))
+                        pprint.pprint(long_content)
+                        response_json = json.loads(long_content)
+                        st.session_state['long_content'] = response_json.get("长文案", [response_json])
                 if 'generated_content' in st.session_state:
                     del st.session_state['generated_content']
                 if 'optimized_content' in st.session_state:
@@ -265,7 +274,10 @@ else:
             st.write("短文案：")
             st.write(st.session_state['short_content'])
             st.write("---")
-        if 'optimized_content' in st.session_state:
+        if 'long_content' in st.session_state:
+            st.write("长文案：")
+            st.write(st.session_state['long_content'])
+            st.write("---")
             st.write("优化后的卖点：")
             st.table(st.session_state['optimized_content'])
     
