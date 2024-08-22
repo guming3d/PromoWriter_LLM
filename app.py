@@ -247,14 +247,6 @@ else:
                         pprint.pprint(long_content)
                         response_json = json.loads(long_content)
                         st.session_state['long_content'] = response_json.get("长文案", [response_json])
-                if 'generated_content' in st.session_state:
-                    del st.session_state['generated_content']
-                if 'optimized_content' in st.session_state:
-                    del st.session_state['optimized_content']
-                if 'short_content' in st.session_state:
-                    del st.session_state['short_content']
-                if 'error' in st.session_state:
-                    del st.session_state['error']
 
     # Right column - Output section
     # adding separator
