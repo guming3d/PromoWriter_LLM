@@ -41,7 +41,7 @@ if not env_valid:
 else:
     # Left column - Input section
     with st.sidebar:
-        st.markdown("<h1 style='color: #00008B;'>营销文案生成</h1>", unsafe_allow_html=True)
+        st.markdown("<h1 style='color: #00008B;'>海信营销文案生成</h1>", unsafe_allow_html=True)
         col1, col2 = st.columns([1, 5])
         with col1:
             st.logo(azure_logo)
