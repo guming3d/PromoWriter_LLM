@@ -192,7 +192,7 @@ else:
             unsafe_allow_html=True
         )
 
-        col1, col2,  = st.columns(2)
+        col1, col2, col3 = st.columns(3)
 
         with col1:
             if st.button("生成卖点", key="generate_content"):
@@ -248,7 +248,12 @@ else:
                         response_json = json.loads(long_content)
                         st.session_state['long_content'] = response_json.get("长文案", [response_json])
 
-    # Right column - Output section
+        with col3:
+            if st.button("全部清空", key="clear_all"):
+                keys_to_clear = ['generated_content', 'optimized_content', 'short_content', 'long_content', 'error']
+                for key in keys_to_clear:
+                    if key in st.session_state:
+                        del st.session_state[key]
     # adding separator
     st.title("内容生成区")
     st.logo(azure_logo)
