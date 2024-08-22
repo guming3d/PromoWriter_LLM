@@ -270,10 +270,5 @@ else:
         if 'optimized_content' in st.session_state:
             st.write("优化后的卖点：")
             st.table(st.session_state['optimized_content'])
-        st.write("原始的卖点：")
-        st.table(st.session_state['generated_content'])
-        st.write("---")
-        st.write("优化后的卖点：")
-        st.table(st.session_state['optimized_content'])
     
 
