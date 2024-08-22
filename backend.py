@@ -80,7 +80,6 @@ def generate_content_azure(system_prompt, user_input):
             "type": "json_object"
             }
     }
-    print(payload)
     try:
         response = requests.post(url, headers=headers, json=payload)
         response.raise_for_status()
