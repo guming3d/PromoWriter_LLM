@@ -202,8 +202,14 @@ else:
                     st.session_state['error'] = "产品名称和产品描述都不能为空，请输入产品名称和产品描述。"
                 else:
                     with st.spinner('卖点生成中......'):
+                        pprint.pprint('--------------->>INPUT START<<--------------------')
+                        print(system_prompt_1)
+                        print(user_input)
+                        pprint.pprint('--------------->>INPUT END<<--------------------')
                         selling_points = generate_content_azure(system_prompt_1, user_input)
-                        pprint.pprint(selling_points)
+                        pprint.pprint('--------------->>OUTPUT START<<--------------------')
+                        print(selling_points)
+                        pprint.pprint('--------------->>OUTPUT END<<--------------------')
                         response_json = json.loads(selling_points)
                         st.session_state['generated_content'] = response_json.get("卖点列表", [response_json])
                         st.session_state['error'] = None
