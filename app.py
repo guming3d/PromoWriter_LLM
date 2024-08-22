@@ -213,8 +213,8 @@ else:
                         st.session_state['error'] = None
 
             if st.button("优化卖点", key="optimize_content"):
-                if 'generated_content' not in st.session_state or not st.session_state['generated_content'] or 'short_content' not in st.session_state or not st.session_state['short_content']:
-                    st.session_state['error'] = "请先点击“生成卖点”按钮生成卖点和短文案。"
+                if 'generated_content' not in st.session_state or not st.session_state['generated_content']:
+                    st.session_state['error'] = "请先点击“生成卖点”按钮生成卖点"
                 else:
                     with st.spinner('卖点优化中......'):
                         selling_points = st.session_state['generated_content']
@@ -227,7 +227,7 @@ else:
         with col2:
             if st.button("生成短文案", key="generate_short_content"):
                 if 'generated_content' not in st.session_state or not st.session_state['generated_content']:
-                    st.session_state['error'] = "请先点击“生成卖点”按钮生成卖点。"
+                    st.session_state['error'] = "请先点击“生成卖点”按钮生成卖点"
                 else:
                     with st.spinner('短文案生成中......'):
                         selling_points = st.session_state['generated_content']
@@ -237,8 +237,8 @@ else:
                         st.session_state['short_content'] = response_json.get("短文案", [response_json])
 
             if st.button("生成长文案", key="generate_long_content"):
-                if 'generated_content' not in st.session_state or not st.session_state['generated_content']:
-                    st.session_state['error'] = "请先点击“生成卖点”按钮生成卖点。"
+                if 'generated_content' not in st.session_state or not st.session_state['generated_content'] or 'short_content' not in st.session_state or not st.session_state['short_content']:
+                    st.session_state['error'] = "请先点击“生成卖点”和“生成短文案”按钮生成卖点和短文案。长文案生成依赖卖点和短文案"
                 else:
                     with st.spinner('长文案生成中......'):
                         selling_points = st.session_state['generated_content']
@@ -265,7 +265,7 @@ else:
 
     elif 'generated_content' in st.session_state:
         st.write("原始的卖点：")
-        st.table(st.session_state['generated_content'])
+        st.write(st.session_state['generated_content'])
         st.write("---")
         if 'short_content' in st.session_state:
             st.write("短文案：")
@@ -276,6 +276,6 @@ else:
             st.write(st.session_state['long_content'])
             st.write("---")
             st.write("优化后的卖点：")
-            st.table(st.session_state['optimized_content'])
+            st.write(st.session_state['optimized_content'])
     
 
