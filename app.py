@@ -259,7 +259,16 @@ else:
     elif 'generated_content' in st.session_state and not 'optimized_content' in st.session_state:
         st.table(st.session_state['generated_content'])
 
-    elif 'optimized_content' in st.session_state:
+    elif 'short_content' in st.session_state:
+        st.write("原始的卖点：")
+        st.table(st.session_state['generated_content'])
+        st.write("---")
+        st.write("短文案：")
+        st.table(st.session_state['short_content'])
+        st.write("---")
+        if 'optimized_content' in st.session_state:
+            st.write("优化后的卖点：")
+            st.table(st.session_state['optimized_content'])
         st.write("原始的卖点：")
         st.table(st.session_state['generated_content'])
         st.write("---")
