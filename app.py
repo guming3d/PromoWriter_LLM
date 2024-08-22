@@ -263,7 +263,7 @@ else:
         st.write("---")
         if 'short_content' in st.session_state:
             st.write("短文案：")
-            st.table(st.session_state['short_content'])
+            st.write(st.session_state['short_content'])
             st.write("---")
         if 'optimized_content' in st.session_state:
             st.write("优化后的卖点：")
