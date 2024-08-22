@@ -30,6 +30,7 @@ def generate_content(user_groups=[], gender="", user_traits="", additional_descr
 
 st.set_page_config(
     page_title="海信国内营销AI文案生成平台",
+    page_icon="images/azure.png",
     layout="wide",  # You can also choose 'wide'
 )
 
@@ -212,7 +213,7 @@ else:
                         st.session_state['generated_content'] = response_json.get("卖点") or response_json.get("卖点列表", [response_json])
                         st.session_state['error'] = None
 
-            if st.button("优化卖点", key="optimize_content"):
+            if st.button("优化卖点顺序", key="optimize_content"):
                 if 'generated_content' not in st.session_state or not st.session_state['generated_content']:
                     st.session_state['error'] = "请先点击“生成卖点”按钮生成卖点"
                 else:
@@ -264,22 +265,22 @@ else:
         st.error(st.session_state['error'])
 
     elif 'generated_content' in st.session_state:
-        st.write("原始的卖点：")
+        st.write("卖点：")
         if 'generated_content' in st.session_state:
             st.write(st.session_state['generated_content'])
-        st.write("---")
         if 'short_content' in st.session_state:
+            st.write("---")
             st.write("短文案：")
-            if 'short_content' in st.session_state:
-                st.write(st.session_state['short_content'])
-            st.write("---")
+            st.write(st.session_state['short_content'])
         if 'long_content' in st.session_state:
-            st.write("长文案：")
-            if 'long_content' in st.session_state:
-                st.write(st.session_state['long_content'])
             st.write("---")
+            st.write("长文案：")
+            st.write(st.session_state['long_content'])
+        if 'optimized_content' in st.session_state:
+            st.write("---")
+            st.write("原始卖点：")
+            st.write(selling_points)
             st.write("优化后的卖点：")
-            if 'optimized_content' in st.session_state:
-                st.write(st.session_state['optimized_content'])
+            st.write(st.session_state['optimized_content'])
     
 
