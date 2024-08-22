@@ -254,12 +254,3 @@ else:
         st.write("优化后的卖点：")
         st.table(st.session_state['optimized_content'])
 
-    if st.button("再试一次", key="retry"):
-        with st.spinner('内容生成中...'):
-            st.session_state['generated_content'] = ""
-            selling_points = generate_content_azure(system_prompt_1, user_input)
-            pprint.pprint(selling_points)
-            response_json = json.loads(selling_points)
-            st.session_state['generated_content'] = json.loads(selling_points).get("卖点列表", [response_json])
-            st.session_state['error'] = None
-            st.table(st.session_state['generated_content'])
