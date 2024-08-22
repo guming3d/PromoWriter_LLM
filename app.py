@@ -226,11 +226,23 @@ else:
                         st.session_state['error'] = None
 
         with col3:
+            if st.button("生成短文案", key="generate_short_content"):
+                if 'generated_content' not in st.session_state or not st.session_state['generated_content']:
+                    st.session_state['error'] = "请先点击“生成卖点”按钮生成卖点。"
+                else:
+                    with st.spinner('短文案生成中......'):
+                        short_content = generate_content_azure(system_prompt_short_generation, json.dumps(st.session_state['generated_content'], ensure_ascii=False))
+                        pprint.pprint(short_content)
+                        response_json = json.loads(short_content)
+                        st.session_state['short_content'] = response_json.get("短文案", [response_json])
+
             if st.button("全部清空", key="clear_all"):
                 if 'generated_content' in st.session_state:
                     del st.session_state['generated_content']
                 if 'optimized_content' in st.session_state:
                     del st.session_state['optimized_content']
+                if 'short_content' in st.session_state:
+                    del st.session_state['short_content']
                 if 'error' in st.session_state:
                     del st.session_state['error']
 
