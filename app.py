@@ -211,7 +211,7 @@ else:
                         print(selling_points)
                         pprint.pprint('--------------->>OUTPUT END<<--------------------')
                         response_json = json.loads(selling_points)
-                        st.session_state['generated_content'] = response_json.get("卖点列表", [response_json])
+                        st.session_state['generated_content'] = response_json.get("卖点", [response_json])
                         st.session_state['error'] = None
 
         with col2:
