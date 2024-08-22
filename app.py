@@ -192,7 +192,7 @@ else:
             unsafe_allow_html=True
         )
 
-        col1, col2, col3 = st.columns(3)
+        col1, col2,  = st.columns(2)
 
         with col1:
             if st.button("生成卖点", key="generate_content"):
@@ -212,7 +212,6 @@ else:
                         st.session_state['generated_content'] = response_json.get("卖点") or response_json.get("卖点列表", [response_json])
                         st.session_state['error'] = None
 
-        with col2:
             if st.button("优化卖点", key="optimize_content"):
                 if 'generated_content' not in st.session_state or not st.session_state['generated_content']:
                     st.session_state['error'] = "请先点击“生成卖点”按钮生成卖点。"
@@ -225,7 +224,7 @@ else:
                         st.session_state['optimized_content'] = response_json.get("卖点") or response_json.get("卖点列表", [response_json])
                         st.session_state['error'] = None
 
-        with col3:
+        with col2:
             if st.button("生成短文案", key="generate_short_content"):
                 if 'generated_content' not in st.session_state or not st.session_state['generated_content']:
                     st.session_state['error'] = "请先点击“生成卖点”按钮生成卖点。"
