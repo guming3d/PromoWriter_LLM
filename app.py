@@ -213,8 +213,8 @@ else:
                         st.session_state['error'] = None
 
             if st.button("优化卖点", key="optimize_content"):
-                if 'generated_content' not in st.session_state or not st.session_state['generated_content']:
-                    st.session_state['error'] = "请先点击“生成卖点”按钮生成卖点。"
+                if 'generated_content' not in st.session_state or not st.session_state['generated_content'] or 'short_content' not in st.session_state or not st.session_state['short_content']:
+                    st.session_state['error'] = "请先点击“生成卖点”按钮生成卖点和短文案。"
                 else:
                     with st.spinner('卖点优化中......'):
                         selling_points = st.session_state['generated_content']
@@ -242,7 +242,8 @@ else:
                 else:
                     with st.spinner('长文案生成中......'):
                         selling_points = st.session_state['generated_content']
-                        long_content = generate_content_azure(system_prompt_long_generation, "卖点信息如下:" + str(selling_points))
+                        short_content = st.session_state['short_content']
+                        long_content = generate_content_azure(system_prompt_long_generation, "卖点信息如下:" + str(selling_points) + "\n短文案信息如下:" + str(short_content))
                         pprint.pprint(long_content)
                         response_json = json.loads(long_content)
                         st.session_state['long_content'] = response_json.get("长文案", [response_json])
