@@ -231,7 +231,8 @@ else:
                     st.session_state['error'] = "请先点击“生成卖点”按钮生成卖点。"
                 else:
                     with st.spinner('短文案生成中......'):
-                        short_content = generate_content_azure(system_prompt_short_generation, json.dumps(st.session_state['generated_content'], ensure_ascii=False))
+                        print(st.session_state['generated_content'])
+                        short_content = generate_content_azure(system_prompt_short_generation, st.session_state['generated_content'])
                         pprint.pprint(short_content)
                         response_json = json.loads(short_content)
                         st.session_state['short_content'] = response_json.get("短文案", [response_json])
