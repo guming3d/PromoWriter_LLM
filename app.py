@@ -53,8 +53,7 @@ else:
         
         competitor_info = st.text_input('竞品信息', '竞品信息')
 
-        product_description_default_backup = """
-产品概述
+        product_description_default_backup = """产品概述
 品牌: 海信 (Hisense)
 型号: KFR-35GW/A820-X1 (A型号)
 主要特点和技术
@@ -83,8 +82,7 @@ else:
 技术规格: 图片的最后部分包含一个技术规格表，列出了如功耗、制冷能力、尺寸等详细规格。
 整个页面的设计目的是全面介绍这款空调，强调其先进功能、用户利益，以及适用于各种生活环境的特点。
         """
-        product_description_default = """
-产品概述
+        product_description_default = """产品概述
 
 品牌: 海信 (Hisense)
 
@@ -141,11 +139,11 @@ else:
         
         # Usage Scenarios
         st.write("使用场景")
-        default_usage_scenarios = """
-1. 当养宠家庭有了宝宝，宝宝衣物手洗无法去除毛屑，宝宝衣物和床上宠物毛难清理；
+        default_usage_scenarios = """1. 当养宠家庭有了宝宝，宝宝衣物手洗无法去除毛屑，宝宝衣物和床上宠物毛难清理；
 2. 大人孩子衣服分开洗，拒绝交叉感染；
 3. 孩子衣服上沾染食物残渣，普通洗衣机洗完仍有污渍残留。
-4.床品和衣物螨虫容易引起宝宝和家人敏感。⑤贴身衣物单独洗，呵护私密健康；
+4. 床品和衣物螨虫容易引起宝宝和家人敏感。
+5. 贴身衣物单独洗，呵护私密健康；
 """
         usage_scenarios = st.text_area("请输入使用场景", default_usage_scenarios, max_chars=1024)
         st.write("附加描述")
