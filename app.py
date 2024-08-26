@@ -316,6 +316,10 @@ else:
                     st.subheader("系统提示:")
                     st.code(system_prompt_long_generation, language='text')
                     st.subheader("用户输入:")
+                    if 'short_content' in st.session_state:
+                        short_content = st.session_state['short_content']
+                    else:
+                        short_content = "短文案信息未生成"
                     st.code("卖点信息如下:" + str(selling_points) + "\n短文案信息如下:" + str(short_content), language='text')
 
         if 'optimized_content' in st.session_state:
