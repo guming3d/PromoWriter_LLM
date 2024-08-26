@@ -213,7 +213,7 @@ else:
                         st.session_state['generated_content'] = response_json.get("卖点") or response_json.get("卖点列表", [response_json])
                         st.session_state['error'] = None
 
-            if st.button("优化卖点顺序", key="optimize_content"):
+            if st.button("顺序优化", key="optimize_content"):
                 if 'generated_content' not in st.session_state or not st.session_state['generated_content']:
                     st.session_state['error'] = "请先点击“生成卖点”按钮生成卖点"
                 else:
@@ -225,6 +225,19 @@ else:
                         st.session_state['optimized_content'] = response_json.get("卖点") or response_json.get("卖点列表", [response_json])
                         st.session_state['optimized_reason'] = response_json.get("优化理由", "未提供")
                         st.session_state['error'] = None
+
+            if st.button("卖点评审", key="review_content"):
+                if 'generated_content' not in st.session_state or not st.session_state['generated_content']:
+                    st.session_state['error'] = "请先点击“生成卖点”按钮生成卖点"
+                else:
+                    with st.spinner('卖点评审中......'):
+                        selling_points = st.session_state['generated_content']
+                        content_revew_result = generate_content_azure(system_prompt_review_selling_points, json.dumps(selling_points, ensure_ascii=False), temperature=0.7, top_p=0.9)
+                        pprint.pprint(content_revew_result)
+                        response_json = json.loads(content_revew_result)
+                        st.session_state['review_result'] = response_json.get("评审结果", [response_json])
+                        st.session_state['error'] = None
+
 
         with col2:
             if st.button("生成短文案", key="generate_short_content"):
@@ -374,6 +387,31 @@ else:
                         """.format(system_prompt_2, json.dumps(selling_points, ensure_ascii=False)),
                         unsafe_allow_html=True
                     )
+
+        if 'review_result' in st.session_state:
+            st.write("---")
+            st.subheader("卖点评审：")
+            with st.container(border=True):
+                st.write("原始卖点：")
+                st.write(selling_points)
+                st.write("评审结果")
+                st.write(st.session_state['review_result'])
+                with st.expander("查看系统提示和用户输入"):
+                    st.markdown(
+                        """
+                        <div style="color: #5F9EA0;">
+                            <h3>系统提示:</h3>
+                            <pre>{}</pre>
+                            <h3>用户输入:</h3>
+                            <pre>{}</pre>
+                        </div>
+                        <div style="text-align: right;">
+                            <img src="https://img.icons8.com/ios-filled/50/000000/expand-arrow.png" width="20" height="20"/>
+                        </div>
+                        """.format(system_prompt_review_selling_points, json.dumps(selling_points, ensure_ascii=False)),
+                        unsafe_allow_html=True
+                    )
+
 
 
             
