@@ -107,7 +107,20 @@ else:
         
         product_description = st.text_area("产品描述", product_description_default, max_chars=1280)
 
-        # Target User Characteristics
+        # User Comments
+        st.subheader("用户评论")
+        use_comments = st.checkbox("是否添加用户评论")
+        user_comments = ""
+        if use_comments:
+            comment_input_method = st.radio("选择输入方式", ("手动输入", "从文件上传"))
+            if comment_input_method == "手动输入":
+                user_comments = st.text_area("用户评论", "", max_chars=2048)
+            else:
+                uploaded_file = st.file_uploader("上传用户评论 JSON 文件", type="json")
+                if uploaded_file is not None:
+                    user_comments = json.load(uploaded_file)
+                    user_comments = json.dumps(user_comments, ensure_ascii=False, indent=4)
+        
         st.subheader("目标用户特征")
         
         target_user_type = st.radio("目标用户", ("不限", "自定义用户"))
@@ -151,6 +164,7 @@ else:
         additional_description = st.text_area("请输入", "", max_chars=500)
 
         # Convert collected data to user input string
+        user_comments_str = f"用户评论: {user_comments}\n" if use_comments else ""
         user_input = (
             f"产品名称: {product_name}\n"
             f"目标人群: {', '.join(user_groups)}\n"
@@ -159,7 +173,8 @@ else:
             f"产品描述: {product_description}\n"
             f"使用场景: {usage_scenarios}\n"
             f"附加描述和要求: {additional_description}\n"
-            f"生成卖点的数量: {generate_number}"
+            f"生成卖点的数量: {generate_number}\n"
+            f"{user_comments_str}"
         )
         
         # Button for generating content
