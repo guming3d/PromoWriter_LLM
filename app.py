@@ -223,6 +223,7 @@ else:
                         pprint.pprint(optimized_content)
                         response_json = json.loads(optimized_content)
                         st.session_state['optimized_content'] = response_json.get("卖点") or response_json.get("卖点列表", [response_json])
+                        st.session_state['optimized_reason'] = response_json.get("优化理由", "未提供")
                         st.session_state['error'] = None
 
         with col2:
@@ -356,10 +357,12 @@ else:
                 st.write(selling_points)
                 st.write("优化后的卖点：")
                 st.write(st.session_state['optimized_content'])
+                st.write("优化理由:")
+                st.write(st.session_state['optimized_reason'])
                 with st.expander("查看系统提示和用户输入"):
                     st.markdown(
                         """
-                        <div style="color: blue;">
+                        <div style="color: #5F9EA0;">
                             <h3>系统提示:</h3>
                             <pre>{}</pre>
                             <h3>用户输入:</h3>
