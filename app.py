@@ -2,7 +2,7 @@ import streamlit as st
 import json
 from backend import generate_content_azure, env_valid, env_error
 import pprint
-from prompt import system_prompt_1, system_prompt_2, system_prompt_short_generation, system_prompt_long_generation
+from prompt import system_prompt_1, system_prompt_2, system_prompt_short_generation, system_prompt_long_generation, system_prompt_review_selling_points
 
 with open("images/Microsoft_Azure.svg", "r") as f:
     azure_logo = f.read()
