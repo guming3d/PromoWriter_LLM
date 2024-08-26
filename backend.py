@@ -57,7 +57,7 @@ headers = {
     "api-key": AZURE_OPENAI_API_KEY
 }
 
-def generate_content_azure(system_prompt, user_input):
+def generate_content_azure(system_prompt, user_input, temperature=0.95, top_p=0.85):
     """
     Generate content using Azure OpenAI service.
     
@@ -73,8 +73,8 @@ def generate_content_azure(system_prompt, user_input):
             {"role": "system", "content": f"{system_prompt}"},
             {"role": "user", "content": f"{user_input}"}
         ],
-        "temperature": 0.95,
-        "top_p": 0.85,
+        "temperature": temperature,
+        "top_p": top_p,
         "max_tokens": 600,
         "response_format": {
             "type": "json_object"
