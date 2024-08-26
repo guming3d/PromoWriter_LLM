@@ -297,6 +297,9 @@ else:
                             <h3>用户输入:</h3>
                             <pre>{}</pre>
                         </div>
+                        <div style="text-align: right;">
+                            <img src="https://img.icons8.com/ios-filled/50/000000/expand-arrow.png" width="20" height="20"/>
+                        </div>
                         """.format(system_prompt_1, user_input),
                         unsafe_allow_html=True
                     )
@@ -316,6 +319,9 @@ else:
                             <h3>用户输入:</h3>
                             <pre>{}</pre>
                         </div>
+                        <div style="text-align: right;">
+                            <img src="https://img.icons8.com/ios-filled/50/000000/expand-arrow.png" width="20" height="20"/>
+                        </div>
                         """.format(system_prompt_short_generation, json.dumps(selling_points, ensure_ascii=False)),
                         unsafe_allow_html=True
                     )
@@ -334,6 +340,9 @@ else:
                             <pre>{}</pre>
                             <h3>用户输入:</h3>
                             <pre>卖点信息如下:{}\n短文案信息如下:{}</pre>
+                        </div>
+                        <div style="text-align: right;">
+                            <img src="https://img.icons8.com/ios-filled/50/000000/expand-arrow.png" width="20" height="20"/>
                         </div>
                         """.format(system_prompt_long_generation, json.dumps(selling_points, ensure_ascii=False), short_content),
                         unsafe_allow_html=True
@@ -355,6 +364,9 @@ else:
                             <pre>{}</pre>
                             <h3>用户输入:</h3>
                             <pre>{}</pre>
+                        </div>
+                        <div style="text-align: right;">
+                            <img src="https://img.icons8.com/ios-filled/50/000000/expand-arrow.png" width="20" height="20"/>
                         </div>
                         """.format(system_prompt_2, json.dumps(selling_points, ensure_ascii=False)),
                         unsafe_allow_html=True
