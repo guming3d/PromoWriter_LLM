@@ -291,7 +291,7 @@ else:
                 with st.expander("查看系统提示和用户输入"):
                     st.markdown(
                         """
-                        <div style="color: blue;">
+                        <div style="color: #5F9EA0;">
                             <h3>系统提示:</h3>
                             <pre>{}</pre>
                             <h3>用户输入:</h3>
@@ -310,7 +310,7 @@ else:
                 with st.expander("查看系统提示和用户输入"):
                     st.markdown(
                         """
-                        <div style="color: blue;">
+                        <div style="color: #5F9EA0;">
                             <h3>系统提示:</h3>
                             <pre>{}</pre>
                             <h3>用户输入:</h3>
@@ -329,7 +329,7 @@ else:
                 with st.expander("查看系统提示和用户输入"):
                     st.markdown(
                         """
-                        <div style="color: blue;">
+                        <div style="color: #5F9EA0;">
                             <h3>系统提示:</h3>
                             <pre>{}</pre>
                             <h3>用户输入:</h3>
