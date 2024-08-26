@@ -289,10 +289,17 @@ else:
                 st.write(st.session_state['generated_content'])
                 # Add expandable container for system_prompt and user_input
                 with st.expander("查看系统提示和用户输入"):
-                    st.subheader("系统提示:")
-                    st.code(system_prompt_1, language='text')
-                    st.subheader("用户输入:")
-                    st.code(user_input, language='text')
+                    st.markdown(
+                        """
+                        <div style="color: blue;">
+                            <h3>系统提示:</h3>
+                            <pre>{}</pre>
+                            <h3>用户输入:</h3>
+                            <pre>{}</pre>
+                        </div>
+                        """.format(system_prompt_1, user_input),
+                        unsafe_allow_html=True
+                    )
 
         if 'short_content' in st.session_state:
             st.write("---")
@@ -301,10 +308,17 @@ else:
                 st.write(st.session_state['short_content'])
                 # Add expandable container for system_prompt and user_input
                 with st.expander("查看系统提示和用户输入"):
-                    st.subheader("系统提示:")
-                    st.code(system_prompt_short_generation, language='text')
-                    st.subheader("用户输入:")
-                    st.code(selling_points, language='json')
+                    st.markdown(
+                        """
+                        <div style="color: blue;">
+                            <h3>系统提示:</h3>
+                            <pre>{}</pre>
+                            <h3>用户输入:</h3>
+                            <pre>{}</pre>
+                        </div>
+                        """.format(system_prompt_short_generation, json.dumps(selling_points, ensure_ascii=False)),
+                        unsafe_allow_html=True
+                    )
 
         if 'long_content' in st.session_state:
             st.write("---")
@@ -313,14 +327,17 @@ else:
                 st.write(st.session_state['long_content'])
                 # Add expandable container for system_prompt and user_input
                 with st.expander("查看系统提示和用户输入"):
-                    st.subheader("系统提示:")
-                    st.code(system_prompt_long_generation, language='text')
-                    st.subheader("用户输入:")
-                    if 'short_content' in st.session_state:
-                        short_content = st.session_state['short_content']
-                    else:
-                        short_content = "短文案信息未生成"
-                    st.code("卖点信息如下:" + str(selling_points) + "\n短文案信息如下:" + str(short_content), language='text')
+                    st.markdown(
+                        """
+                        <div style="color: blue;">
+                            <h3>系统提示:</h3>
+                            <pre>{}</pre>
+                            <h3>用户输入:</h3>
+                            <pre>卖点信息如下:{}\n短文案信息如下:{}</pre>
+                        </div>
+                        """.format(system_prompt_long_generation, json.dumps(selling_points, ensure_ascii=False), short_content),
+                        unsafe_allow_html=True
+                    )
 
         if 'optimized_content' in st.session_state:
             st.write("---")
@@ -331,10 +348,17 @@ else:
                 st.write("优化后的卖点：")
                 st.write(st.session_state['optimized_content'])
                 with st.expander("查看系统提示和用户输入"):
-                    st.subheader("系统提示:")
-                    st.code(system_prompt_2, language='text')
-                    st.subheader("用户输入:")
-                    st.code(selling_points, language='json')
+                    st.markdown(
+                        """
+                        <div style="color: blue;">
+                            <h3>系统提示:</h3>
+                            <pre>{}</pre>
+                            <h3>用户输入:</h3>
+                            <pre>{}</pre>
+                        </div>
+                        """.format(system_prompt_2, json.dumps(selling_points, ensure_ascii=False)),
+                        unsafe_allow_html=True
+                    )
 
 
             
