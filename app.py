@@ -305,5 +305,19 @@ else:
                 st.write(selling_points)
                 st.write("优化后的卖点：")
                 st.write(st.session_state['optimized_content'])
+
+        # Add expandable container for system_prompt and user_input
+        with st.expander("查看系统提示和用户输入"):
+            st.subheader("系统提示:")
+            st.code(system_prompt_1, language='text')
+            st.subheader("用户输入:")
+            st.code(user_input, language='text')
+            st.write("---")
+            st.subheader("卖点顺序优化：")
+            with st.container(border=True):
+                st.write("原始卖点：")
+                st.write(selling_points)
+                st.write("优化后的卖点：")
+                st.write(st.session_state['optimized_content'])
     
 
