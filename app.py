@@ -219,7 +219,7 @@ else:
                 else:
                     with st.spinner('卖点优化中......'):
                         selling_points = st.session_state['generated_content']
-                        optimized_content = generate_content_azure(system_prompt_2, json.dumps(selling_points, ensure_ascii=False))
+                        optimized_content = generate_content_azure(system_prompt_2, json.dumps(selling_points, ensure_ascii=False), temperature=0.7, top_p=0.9)
                         pprint.pprint(optimized_content)
                         response_json = json.loads(optimized_content)
                         st.session_state['optimized_content'] = response_json.get("卖点") or response_json.get("卖点列表", [response_json])
@@ -271,7 +271,7 @@ else:
 
         with col3:
             if st.button("全部清空", key="clear_all"):
-                keys_to_clear = ['generated_content', 'optimized_content', 'short_content', 'long_content', 'error']
+                keys_to_clear = ['generated_content', 'optimized_content', 'short_content', 'long_content', 'error', 'optimized_reason']
                 for key in keys_to_clear:
                     if key in st.session_state:
                         del st.session_state[key]
