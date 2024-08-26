@@ -277,29 +277,29 @@ else:
     # adding separator
     st.title("内容生成区")
     st.logo(azure_logo)
-    st.write("---")
 
     # Retrieve generated content from session state
     if 'error' in st.session_state and st.session_state['error']:
         st.error(st.session_state['error'])
 
     elif 'generated_content' in st.session_state:
-        st.write("卖点：")
         if 'generated_content' in st.session_state:
+            st.subheader("卖点：")
             with st.container(border=True):
                 st.write(st.session_state['generated_content'])
         if 'short_content' in st.session_state:
             st.write("---")
+            st.subheader("短文案：")
             with st.container(border=True):
-                st.write("短文案：")
                 st.write(st.session_state['short_content'])
         if 'long_content' in st.session_state:
             st.write("---")
+            st.subheader("长文案：")
             with st.container(border=True):
-                st.write("长文案：")
                 st.write(st.session_state['long_content'])
         if 'optimized_content' in st.session_state:
             st.write("---")
+            st.subheader("卖点顺序优化：")
             with st.container(border=True):
                 st.write("原始卖点：")
                 st.write(selling_points)
