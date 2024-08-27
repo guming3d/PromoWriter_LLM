@@ -288,7 +288,7 @@ else:
                         print('--------------->>INPUT END<<--------------------\n')
 
 
-                        long_content = generate_content_azure(system_prompt_long_generation, "卖点信息如下:" + str(selling_points) + "\n短文案信息如下:" + str(short_content))
+                        long_content = generate_content_azure(system_prompt_long_generation, "卖点信息如下:" + str(selling_points) + "\n短文案信息如下:" + str(short_content), max_tokens=800)
                         print('--------------->>OUTPUT START<<--------------------')
                         print(long_content)
                         print('--------------->>OUTPUT END<<--------------------\n')
@@ -306,7 +306,7 @@ else:
     # adding separator
     st.title("内容生成区")
     st.logo(azure_logo)
-
+    
     # Retrieve generated content from session state
     if 'error' in st.session_state and st.session_state['error']:
         st.error(st.session_state['error'])
