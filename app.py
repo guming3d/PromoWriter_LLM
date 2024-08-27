@@ -398,6 +398,28 @@ else:
                         unsafe_allow_html=True
                     )
 
+        if 'promotion_content' in st.session_state:
+            st.write("---")
+            st.subheader("推广文：")
+            with st.container(border=True):
+                st.write(st.session_state['promotion_content'])
+                # Add expandable container for system_prompt and user_input
+                with st.expander("查看系统提示和用户输入"):
+                    st.markdown(
+                        """
+                        <div style="color: #5F9EA0;">
+                            <h3>系统提示:</h3>
+                            <pre>{}</pre>
+                            <h3>用户输入:</h3>
+                            <pre>卖点信息如下:{}\n短文案信息如下:{}</pre>
+                        </div>
+                        <div style="text-align: right;">
+                            <img src="https://img.icons8.com/ios-filled/50/000000/expand-arrow.png" width="20" height="20"/>
+                        </div>
+                        """.format(system_prompt_promotion_generation, json.dumps(selling_points, ensure_ascii=False), short_content),
+                        unsafe_allow_html=True
+                    )
+
         if 'optimized_content' in st.session_state:
             st.write("---")
             st.subheader("卖点顺序优化：")
