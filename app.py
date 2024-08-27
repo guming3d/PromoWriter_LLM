@@ -2,31 +2,11 @@ import streamlit as st
 import json
 from backend import generate_content_azure, env_valid, env_error
 import pprint
-from prompt import generate_system_prompt_selling_point, system_prompt_2, system_prompt_short_generation, system_prompt_long_generation, system_prompt_review_selling_points
+from prompt import generate_system_prompt_selling_point, system_prompt_2, system_prompt_short_generation, system_prompt_long_generation, system_prompt_review_selling_points, system_prompt_promotion_generation
 
 with open("images/Microsoft_Azure.svg", "r") as f:
     azure_logo = f.read()
 
-# Backend function to generate content based on inputs
-def generate_content(user_groups=[], gender="", user_traits="", additional_description="", generate_number=1):
-    # Simulate content generation logic
-    content = []
-    
-    # Simple logic to generate content based on user inputs
-    for i in range(generate_number):
-        content_item = f"Generated Content {i+1}: "
-        content_item += f"人群圈层 - {', '.join(user_groups)}; "
-        content_item += f"性别 - {gender}; "
-        
-        if user_traits:
-            content_item += f"特征 - {user_traits}; "
-        
-        if additional_description:
-            content_item += f"描述 - {additional_description}; "
-        
-        content.append(content_item)
-    
-    return content
 
 st.set_page_config(
     page_title="海信国内营销AI文案生成平台",
@@ -317,6 +297,32 @@ else:
                         except json.JSONDecodeError:
                             st.session_state['error'] = "生成的长文案不是有效的JSON格式。"
                             st.session_state['long_content'] = long_content
+
+            if st.button("生成推广文", key="generate_promotion_content"):
+                if 'generated_content' not in st.session_state or not st.session_state['generated_content'] or 'short_content' not in st.session_state or not st.session_state['short_content']:
+                        st.session_state['error'] = "请先点击“生成卖点”和“ 生成短文案”按钮生成卖点和短文案。推广文生成依赖卖点和短文案"
+                else:
+                    with st.spinner('推广文生成中......'):
+                        selling_points = st.session_state['generated_content']
+                        short_content = st.session_state['short_content']
+
+                        print('--------------->>INPUT START<<--------------------')
+                        print(system_prompt_promotion_generation)
+                        print(short_content)
+                        print('--------------->>INPUT END<<--------------------\n')
+
+
+                        promotion_content = generate_content_azure(system_prompt_promotion_generation, "卖点信息如下:" + str(selling_points) + "\n短文案信息如下:" + str(short_content), max_tokens=800)
+                        print('--------------->>OUTPUT START<<--------------------')
+                        print(promotion_content)
+                        print('--------------->>OUTPUT END<<--------------------\n')
+
+                        try:
+                            response_json = json.loads(promotion_content)
+                            st.session_state['promotion_content'] = response_json.get("推广文案", [response_json])
+                        except json.JSONDecodeError:
+                            st.session_state['error'] = "生成的推广文案不是有效的JSON格式。"
+                            st.session_state['promotion_content'] = promotion_content
 
         with col3:
             if st.button("全部清空", key="clear_all"):
