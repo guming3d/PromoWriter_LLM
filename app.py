@@ -2,7 +2,7 @@ import streamlit as st
 import json
 from backend import generate_content_azure, env_valid, env_error
 import pprint
-from prompt import system_prompt_1, system_prompt_2, system_prompt_short_generation, system_prompt_long_generation, system_prompt_review_selling_points
+from prompt import generate_system_prompt_selling_point, system_prompt_2, system_prompt_short_generation, system_prompt_long_generation, system_prompt_review_selling_points
 
 with open("images/Microsoft_Azure.svg", "r") as f:
     azure_logo = f.read()
@@ -210,6 +210,7 @@ else:
 
         col1, col2, col3 = st.columns(3)
 
+        system_prompt = generate_system_prompt_selling_point(generate_number)
         with col1:
             if st.button("生成卖点", key="generate_content"):
                 if not product_name or not product_description.strip():
@@ -217,10 +218,10 @@ else:
                 else:
                     with st.spinner('卖点生成中......'):
                         print('--------------->>INPUT START<<--------------------')
-                        print(system_prompt_1)
+                        print(system_prompt)
                         print(user_input)
                         print('--------------->>INPUT END<<--------------------\n')
-                        selling_points = generate_content_azure(system_prompt_1, user_input)
+                        selling_points = generate_content_azure(system_prompt, user_input)
                         print('--------------->>OUTPUT START<<--------------------')
                         print(selling_points)
                         print('--------------->>OUTPUT END<<--------------------\n')
@@ -329,7 +330,7 @@ else:
                         <div style="text-align: right;">
                             <img src="https://img.icons8.com/ios-filled/50/000000/expand-arrow.png" width="20" height="20"/>
                         </div>
-                        """.format(system_prompt_1, user_input),
+                        """.format(system_prompt, user_input),
                         unsafe_allow_html=True
                     )
 
