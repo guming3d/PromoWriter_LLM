@@ -2,7 +2,7 @@ import streamlit as st
 import json
 from backend import generate_content_azure, env_valid, env_error
 import pprint
-from prompt import generate_system_prompt_selling_point, system_prompt_2, system_prompt_short_generation, system_prompt_long_generation, system_prompt_review_selling_points, system_prompt_promotion_generation, system_prompt_long_title_generation
+from prompt import generate_system_prompt_selling_point, system_prompt_2, system_prompt_short_generation, system_prompt_long_generation, system_prompt_review_selling_points, system_prompt_promotion_generation, system_prompt_long_title_generation, system_prompt_display_framework_generation
 
 with open("images/Microsoft_Azure.svg", "r") as f:
     azure_logo = f.read()
@@ -348,6 +348,33 @@ else:
                         except json.JSONDecodeError:
                             st.session_state['error'] = "生成的长标题输出不是有效的JSON格式。"
                             st.session_state['long_title_content'] = long_title_content
+                            
+            if st.button("商详页框架", key="generate_product_detail_page"):
+                if 'generated_content' not in st.session_state or not st.session_state['generated_content'] or 'short_content' not in st.session_state or not st.session_state['short_content']:
+                    st.session_state['error'] = "请先点击“生成卖点”和“生成短文案”按钮生成卖点和短文案。商详页框架生成依赖卖点和短文案"
+                else:
+                    with st.spinner('商详页框架生成中......'):
+                        selling_points = st.session_state['generated_content']
+                        short_content = st.session_state['short_content']
+
+                        print('--------------->>INPUT START<<--------------------')
+                        print(system_prompt_display_framework_generation)
+                        print("卖点信息如下:" + str(selling_points))
+                        print("短文案信息如下:" + str(short_content))
+                        print('--------------->>INPUT END<<--------------------\n')
+
+                        product_detail_page_content = generate_content_azure(system_prompt_display_framework_generation, "卖点信息如下:" + str(selling_points) + "\n短文案信息如下:" + str(short_content), max_tokens=1000)
+                        print('--------------->>OUTPUT START<<--------------------')
+                        print(product_detail_page_content)
+                        print('--------------->>OUTPUT END<<--------------------\n')
+
+                        try:
+                            response_json = json.loads(product_detail_page_content)
+                            st.session_state['product_detail_page_content'] = response_json.get("长文案", [response_json])
+                        except json.JSONDecodeError:
+                            st.session_state['error'] = "生成的商详页框架输出不是有效的JSON格式。"
+                            st.session_state['product_detail_page_content'] = product_detail_page_content
+            
        
 
         with col3:
@@ -365,6 +392,7 @@ else:
         st.error(st.session_state['error'])
 
     elif 'generated_content' in st.session_state:
+        selling_points = st.session_state['generated_content']
         if 'generated_content' in st.session_state:
             st.subheader("卖点：")
             with st.container(border=True):
@@ -389,6 +417,7 @@ else:
         if 'short_content' in st.session_state:
             st.write("---")
             st.subheader("短文案：")
+            short_content = st.session_state['short_content']
             with st.container(border=True):
                 st.write(st.session_state['short_content'])
                 # Add expandable container for system_prompt and user_input
@@ -520,5 +549,27 @@ else:
                             <img src="https://img.icons8.com/ios-filled/50/000000/expand-arrow.png" width="20" height="20"/>
                         </div>
                         """.format(system_prompt_long_title_generation, json.dumps(selling_points, ensure_ascii=False), short_content),
+                        unsafe_allow_html=True
+                    )
+        
+        if 'product_detail_page_content' in st.session_state:
+            st.write("---")
+            st.subheader("商详页框架：")
+            with st.container(border=True):
+                st.write(st.session_state['product_detail_page_content'])
+                # Add expandable container for system_prompt and user_input
+                with st.expander("查看系统提示和用户输入"):
+                    st.markdown(
+                        """
+                        <div style="color: #5F9EA0;">
+                            <h3>系统提示:</h3>
+                            <pre>{}</pre>
+                            <h3>用户输入:</h3>
+                            <pre>卖点信息如下:{}\n短文案信息如下:{}</pre>
+                        </div>
+                        <div style="text-align: right;">
+                            <img src="https://img.icons8.com/ios-filled/50/000000/expand-arrow.png" width="20" height="20"/>
+                        </div>
+                        """.format(system_prompt_display_framework_generation, json.dumps(selling_points, ensure_ascii=False), short_content),
                         unsafe_allow_html=True
                     )
