@@ -363,23 +363,23 @@ else:
                         print("短文案信息如下:" + str(short_content))
                         print('--------------->>INPUT END<<--------------------\n')
 
-                        product_detail_page_content = generate_content_azure(system_prompt_display_framework_generation, "卖点信息如下:" + str(selling_points) + "\n短文案信息如下:" + str(short_content), max_tokens=1000)
+                        product_detail_page_content = generate_content_azure(system_prompt_display_framework_generation, "卖点信息如下:" + str(selling_points) + "\n短文案信息如下:" + str(short_content), max_tokens=2048)
                         print('--------------->>OUTPUT START<<--------------------')
                         print(product_detail_page_content)
                         print('--------------->>OUTPUT END<<--------------------\n')
 
                         try:
                             response_json = json.loads(product_detail_page_content)
-                            st.session_state['product_detail_page_content'] = response_json.get("长文案", [response_json])
+                            st.session_state['product_detail_page_content'] = response_json.get("商详页框架", [response_json])
                         except json.JSONDecodeError:
                             st.session_state['error'] = "生成的商详页框架输出不是有效的JSON格式。"
+                            print(f"failed to parse response_json, input:{product_detail_page_content}")
                             st.session_state['product_detail_page_content'] = product_detail_page_content
-            
        
 
         with col3:
             if st.button("全部清空", key="clear_all"):
-                keys_to_clear = ['generated_content', 'optimized_content', 'short_content', 'long_content', 'error', 'optimized_reason']
+                keys_to_clear = ['generated_content', 'optimized_content', 'short_content', 'long_content', 'error', 'optimized_reason', 'review_result', 'long_title_content', 'product_detail_page_content', 'promotion_content']
                 for key in keys_to_clear:
                     if key in st.session_state:
                         del st.session_state[key]
@@ -391,7 +391,7 @@ else:
     if 'error' in st.session_state and st.session_state['error']:
         st.error(st.session_state['error'])
 
-    elif 'generated_content' in st.session_state:
+    if 'generated_content' in st.session_state:
         selling_points = st.session_state['generated_content']
         if 'generated_content' in st.session_state:
             st.subheader("卖点：")
