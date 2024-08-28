@@ -4,6 +4,7 @@ from backend import generate_content_azure, env_valid, env_error
 import pprint
 from prompt import generate_system_prompt_selling_point, system_prompt_2, system_prompt_short_generation, system_prompt_long_generation, system_prompt_review_selling_points, system_prompt_promotion_generation, system_prompt_long_title_generation, system_prompt_display_framework_generation
 import datetime
+import streamlit.components.v1 as components
 
 with open("images/Microsoft_Azure.svg", "r") as f:
     azure_logo = f.read()
@@ -408,7 +409,17 @@ else:
                 for key in keys_to_clear:
                     if key in st.session_state:
                         del st.session_state[key]
-    # adding separator
+            if st.button("历史纪录", key="view_history"):
+                with open("history.md", "r", encoding="utf-8") as f:
+                    history_content = f.read()
+                st.markdown(
+                    f"""
+                    <div style="background-color: #f9f9f9; padding: 10px; border-radius: 5px; border: 1px solid #ddd;">
+                        <pre style="white-space: pre-wrap; word-wrap: break-word;">{history_content}</pre>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
     st.title("内容生成区")
     st.logo(azure_logo)
     
