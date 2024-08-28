@@ -236,7 +236,7 @@ else:
                 else:
                     with st.spinner('卖点评审中......'):
                         selling_points = st.session_state['generated_content']
-                        content_revew_result = generate_content_azure(system_prompt_review_selling_points, json.dumps(selling_points, ensure_ascii=False), temperature=0.7, top_p=0.9)
+                        content_revew_result = generate_content_azure(system_prompt_review_selling_points, json.dumps(selling_points, ensure_ascii=False), temperature=0.7, top_p=0.9, max_tokens=1600)
                         pprint.pprint(content_revew_result)
                         try:
                             response_json = json.loads(content_revew_result)
