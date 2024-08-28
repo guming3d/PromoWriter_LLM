@@ -410,19 +410,23 @@ else:
                 for key in keys_to_clear:
                     if key in st.session_state:
                         del st.session_state[key]
-            modal = Modal(key="history_modal", title="历史纪录")
             if st.button("历史纪录", key="view_history"):
-                with modal.container():
-                    with open("history.md", "r", encoding="utf-8") as f:
-                        history_content = f.read()
-                    st.markdown(
-                        f"""
-                        <div style="background-color: #f9f9f9; padding: 10px; border-radius: 5px; border: 1px solid #ddd;">
-                            <pre style="white-space: pre-wrap; word-wrap: break-word;">{history_content}</pre>
-                        </div>
-                        """,
-                        unsafe_allow_html=True
-                    )
+                st.session_state['show_history_modal'] = True
+
+    if 'show_history_modal' in st.session_state and st.session_state['show_history_modal']:
+        modal = Modal(key="history_modal", title="历史纪录")
+        with modal.container():
+            with open("history.md", "r", encoding="utf-8") as f:
+                history_content = f.read()
+            st.markdown(
+                f"""
+                <div style="background-color: #f9f9f9; padding: 10px; border-radius: 5px; border: 1px solid #ddd;">
+                    <pre style="white-space: pre-wrap; word-wrap: break-word;">{history_content}</pre>
+                </div>
+                """,
+                unsafe_allow_html=True
+            )
+        st.session_state['show_history_modal'] = False
     st.title("内容生成区")
     st.logo(azure_logo)
     
