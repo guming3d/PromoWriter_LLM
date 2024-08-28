@@ -3,6 +3,7 @@ import json
 from backend import generate_content_azure, env_valid, env_error
 import pprint
 from prompt import generate_system_prompt_selling_point, system_prompt_2, system_prompt_short_generation, system_prompt_long_generation, system_prompt_review_selling_points, system_prompt_promotion_generation, system_prompt_long_title_generation, system_prompt_display_framework_generation
+import datetime
 
 with open("images/Microsoft_Azure.svg", "r") as f:
     azure_logo = f.read()
@@ -190,6 +191,13 @@ else:
 
         col1, col2, col3 = st.columns(3)
 
+        def log_to_markdown(action, output):
+            timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            with open("history.md", "a", encoding="utf-8") as f:
+                f.write(f"## {timestamp}\n")
+                f.write(f"**Action:** {action}\n")
+                f.write(f"**Output:**\n```json\n{json.dumps(output, ensure_ascii=False, indent=4)}\n```\n\n")
+
         system_prompt = generate_system_prompt_selling_point(generate_number)
         with col1:
             if st.button("生成卖点", key="generate_content"):
@@ -207,7 +215,9 @@ else:
                         print('--------------->>OUTPUT END<<--------------------\n')
                         try:
                             response_json = json.loads(selling_points)
-                            st.session_state['generated_content'] = response_json.get("卖点") or response_json.get("卖点列表", [response_json])
+                            generated_content = response_json.get("卖点") or response_json.get("卖点列表", [response_json])
+                            st.session_state['generated_content'] = generated_content
+                            log_to_markdown("生成卖点", generated_content)
                             st.session_state['error'] = None
                         except json.JSONDecodeError:
                             st.session_state['error'] = "生成的内容不是有效的JSON格式。"
@@ -223,7 +233,10 @@ else:
                         pprint.pprint(optimized_content)
                         try:
                             response_json = json.loads(optimized_content)
-                            st.session_state['optimized_content'] = response_json.get("卖点") or response_json.get("卖点列表", [response_json])
+                            optimized_content = response_json.get("卖点") or response_json.get("卖点列表", [response_json])
+                            st.session_state['optimized_content'] = optimized_content
+                            st.session_state['optimized_reason'] = response_json.get("优化理由", "未提供")
+                            log_to_markdown("顺序优化", {"optimized_content": optimized_content, "optimized_reason": st.session_state['optimized_reason']})
                             st.session_state['optimized_reason'] = response_json.get("优化理由", "未提供")
                             st.session_state['error'] = None
                         except json.JSONDecodeError:
@@ -240,7 +253,9 @@ else:
                         pprint.pprint(content_revew_result)
                         try:
                             response_json = json.loads(content_revew_result)
-                            st.session_state['review_result'] = response_json.get("评审结果", [response_json])
+                            review_result = response_json.get("评审结果", [response_json])
+                            st.session_state['review_result'] = review_result
+                            log_to_markdown("卖点评审", review_result)
                             st.session_state['error'] = None
                         except json.JSONDecodeError:
                             st.session_state['error'] = "评审的内容不是有效的JSON格式。"
@@ -266,7 +281,9 @@ else:
 
                         try:
                             response_json = json.loads(short_content)
-                            st.session_state['short_content'] = response_json.get("短文案", [response_json])
+                            short_content = response_json.get("短文案", [response_json])
+                            st.session_state['short_content'] = short_content
+                            log_to_markdown("生成短文案", short_content)
                         except json.JSONDecodeError:
                             st.session_state['error'] = "生成的短文案不是有效的JSON格式。"
                             st.session_state['short_content'] = short_content
@@ -293,7 +310,9 @@ else:
 
                         try:
                             response_json = json.loads(long_content)
-                            st.session_state['long_content'] = response_json.get("长文案", [response_json])
+                            long_content = response_json.get("长文案", [response_json])
+                            st.session_state['long_content'] = long_content
+                            log_to_markdown("生成长文案", long_content)
                         except json.JSONDecodeError:
                             st.session_state['error'] = "生成的长文案不是有效的JSON格式。"
                             st.session_state['long_content'] = long_content
@@ -319,7 +338,9 @@ else:
 
                         try:
                             response_json = json.loads(promotion_content)
-                            st.session_state['promotion_content'] = response_json.get("推广文案", [response_json])
+                            promotion_content = response_json.get("推广文案", [response_json])
+                            st.session_state['promotion_content'] = promotion_content
+                            log_to_markdown("生成推广文", promotion_content)
                         except json.JSONDecodeError:
                             st.session_state['error'] = "生成的推广文案不是有效的JSON格式。"
                             st.session_state['promotion_content'] = promotion_content
@@ -344,7 +365,9 @@ else:
 
                         try:
                             response_json = json.loads(long_title_content)
-                            st.session_state['long_title_content'] = response_json.get("长标题", [response_json])
+                            long_title_content = response_json.get("长标题", [response_json])
+                            st.session_state['long_title_content'] = long_title_content
+                            log_to_markdown("生成长标题", long_title_content)
                         except json.JSONDecodeError:
                             st.session_state['error'] = "生成的长标题输出不是有效的JSON格式。"
                             st.session_state['long_title_content'] = long_title_content
@@ -370,7 +393,9 @@ else:
 
                         try:
                             response_json = json.loads(product_detail_page_content)
-                            st.session_state['product_detail_page_content'] = response_json.get("商详页框架", [response_json])
+                            product_detail_page_content = response_json.get("商详页框架", [response_json])
+                            st.session_state['product_detail_page_content'] = product_detail_page_content
+                            log_to_markdown("商详页框架", product_detail_page_content)
                         except json.JSONDecodeError:
                             st.session_state['error'] = "生成的商详页框架输出不是有效的JSON格式。"
                             print(f"failed to parse response_json, input:{product_detail_page_content}")
