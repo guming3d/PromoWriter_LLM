@@ -1,4 +1,3 @@
-# Define the prompts
 
 # 1. 基于产品信息和目标人群生成卖点
 def generate_system_prompt_selling_point(selling_point_number):
@@ -286,7 +285,7 @@ system_prompt_long_title_generation = """
     "长标题":
     [
         {
-            "标题内容": "通过我们的产品，您不仅享受到先进技术带来的便利，还能体验到设计中融入的人文关怀和对细节的极致追求。例如，我们的智能家电系列不仅提供智能化操作，更有节能环保的特性，适合追求高品质生活的您。"
+            "标题内容": xxx 
         },
         ...
     ]
