@@ -194,8 +194,8 @@ else:
         def log_to_markdown(action, output):
             timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             with open("history.md", "a", encoding="utf-8") as f:
-                f.write(f"## {timestamp}\n")
-                f.write(f"**Action:** {action}\n")
+                # f.write(f"## {timestamp}\n")
+                f.write(f"## {timestamp}  {action}\n\n")
                 f.write(f"**Output:**\n```json\n{json.dumps(output, ensure_ascii=False, indent=4)}\n```\n\n")
 
         system_prompt = generate_system_prompt_selling_point(generate_number)
