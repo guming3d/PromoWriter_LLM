@@ -201,7 +201,7 @@ else:
                         print(system_prompt)
                         print(user_input)
                         print('--------------->>INPUT END<<--------------------\n')
-                        selling_points = generate_content_azure(system_prompt, user_input)
+                        selling_points = generate_content_azure(system_prompt, user_input, max_tokens=1200)
                         print('--------------->>OUTPUT START<<--------------------')
                         print(selling_points)
                         print('--------------->>OUTPUT END<<--------------------\n')
