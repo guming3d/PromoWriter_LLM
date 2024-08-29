@@ -35,9 +35,9 @@ pip install -r requirements.txt
 创建一个`.env`文件，并添加以下内容：
 
 ```plaintext
-AZURE_OPENAI_ENDPOINT=<your_azure_openai_endpoint>
-AZURE_OPENAI_DEPLOYMENT_NAME=<your_azure_openai_deployment_name>
-AZURE_OPENAI_API_KEY=<your_azure_openai_api_key>
+AZURE_OPENAI_ENDPOINT=<your_azure_openai_endpoint> #比如:https://minggu-aoai.openai.azure.com
+AZURE_OPENAI_DEPLOYMENT_NAME=<your_azure_openai_deployment_name> #比如:gpt-4o
+AZURE_OPENAI_API_KEY=<your_azure_openai_api_key> #比如: xxxx8186851d94efeb0d13fcxxxxxxxxxx
 ```
 
 ### 5. 运行应用程序

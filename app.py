@@ -304,7 +304,7 @@ else:
                         print('--------------->>INPUT END<<--------------------\n')
 
 
-                        long_content = generate_content_azure(system_prompt_long_generation, "卖点信息如下:" + str(selling_points) + "\n短文案信息如下:" + str(short_content), max_tokens=800)
+                        long_content = generate_content_azure(system_prompt_long_generation, "卖点信息如下:" + str(selling_points) + "\n短文案信息如下:" + str(short_content), max_tokens=2048)
                         print('--------------->>OUTPUT START<<--------------------')
                         print(long_content)
                         print('--------------->>OUTPUT END<<--------------------\n')
@@ -333,19 +333,20 @@ else:
                         print('--------------->>INPUT END<<--------------------\n')
 
 
-                        promotion_content = generate_content_azure(system_prompt_promotion_generation, "卖点信息如下:" + str(selling_points) + "\n短文案信息如下:" + str(short_content), max_tokens=800)
+                        promotion_content = generate_content_azure(system_prompt_promotion_generation, "卖点信息如下:" + str(selling_points) + "\n短文案信息如下:" + str(short_content), max_tokens=4096)
                         print('--------------->>OUTPUT START<<--------------------')
                         print(promotion_content)
                         print('--------------->>OUTPUT END<<--------------------\n')
 
                         try:
                             response_json = json.loads(promotion_content)
-                            promotion_content = response_json.get("推广文案", [response_json])
+                            promotion_content = response_json.get("推广文案", response_json)
                             st.session_state['promotion_content'] = promotion_content
                             log_to_markdown("生成推广文", promotion_content)
                         except json.JSONDecodeError:
                             st.session_state['error'] = "生成的推广文案不是有效的JSON格式。"
                             st.session_state['promotion_content'] = promotion_content
+
             if st.button("生成长标题", key="generate_long_title_content"):
                 if 'generated_content' not in st.session_state or not st.session_state['generated_content'] or 'short_content' not in st.session_state or not st.session_state['short_content']:
                         st.session_state['error'] = "请先点击“生成卖点”和“ 生成短文案”按钮生成卖点和短文案。长标题生成依赖卖点和短文案"
@@ -427,6 +428,7 @@ else:
                 unsafe_allow_html=True
             )
         st.session_state['show_history_modal'] = False
+
     st.title("内容生成区")
     st.logo(azure_logo)
     
