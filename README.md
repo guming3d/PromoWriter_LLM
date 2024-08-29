@@ -6,23 +6,19 @@
 
 请按照以下步骤安装和运行此项目：
 
-### 1. 克隆仓库
 
-```bash
-git clone <your-repo-url>
-cd <your-repo-directory>
-```
 
-### 2. 创建虚拟环境
+### 1. 创建虚拟环境
 
 建议使用Python虚拟环境来隔离项目依赖：
 
 ```bash
+cd <your-repo-directory>
 python3 -m venv venv
 source venv/bin/activate  # 对于Windows用户，使用 `venv\Scripts\activate`
 ```
 
-### 3. 安装依赖
+### 2. 安装依赖
 
 使用pip安装项目所需的依赖：
 
@@ -30,7 +26,7 @@ source venv/bin/activate  # 对于Windows用户，使用 `venv\Scripts\activate`
 pip install -r requirements.txt
 ```
 
-### 4. 配置环境变量
+### 3. 配置环境变量
 
 创建一个`.env`文件，并添加以下内容：
 
@@ -40,7 +36,7 @@ AZURE_OPENAI_DEPLOYMENT_NAME=<your_azure_openai_deployment_name> #比如:gpt-4o
 AZURE_OPENAI_API_KEY=<your_azure_openai_api_key> #比如: xxxx8186851d94efeb0d13fcxxxxxxxxxx
 ```
 
-### 5. 运行应用程序
+### 4. 运行应用程序
 
 使用Streamlit运行应用程序：
 
@@ -50,7 +46,7 @@ streamlit run app.py
 
 打开浏览器并访问 `http://localhost:8501` 查看应用程序。
 
-### 6. 按钮功能说明
+### 5. 按钮功能说明
 
 应用程序中包含以下按钮，每个按钮都有特定的功能：
 
