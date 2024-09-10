@@ -202,7 +202,7 @@ else:
 
         system_prompt = generate_system_prompt_selling_point(generate_number)
         with col1:
-            if st.button("生成卖点", key="generate_content"):
+            if st.button("Generate Selling Points", key="generate_content"):
                 if not product_name or not product_description.strip():
                     st.session_state['error'] = "产品名称和产品描述都不能为空，请输入产品名称和产品描述。"
                 else:
@@ -225,7 +225,7 @@ else:
                             st.session_state['error'] = "生成的内容不是有效的JSON格式。"
                             st.session_state['generated_content'] = selling_points
 
-            if st.button("顺序优化", key="optimize_content"):
+            if st.button("Optimize Order", key="optimize_content"):
                 if 'generated_content' not in st.session_state or not st.session_state['generated_content']:
                     st.session_state['error'] = "请先点击“生成卖点”按钮生成卖点"
                 else:
@@ -245,7 +245,7 @@ else:
                             st.session_state['error'] = "优化的内容不是有效的JSON格式。"
                             st.session_state['optimized_content'] = optimized_content
 
-            if st.button("卖点评审", key="review_content"):
+            if st.button("Review Selling Points", key="review_content"):
                 if 'generated_content' not in st.session_state or not st.session_state['generated_content']:
                     st.session_state['error'] = "请先点击“生成卖点”按钮生成卖点"
                 else:
@@ -265,7 +265,7 @@ else:
 
 
         with col2:
-            if st.button("生成短文案", key="generate_short_content"):
+            if st.button("Generate Short Copy", key="generate_short_content"):
                 if 'generated_content' not in st.session_state or not st.session_state['generated_content']:
                     st.session_state['error'] = "请先点击“生成卖点”按钮生成卖点"
                 else:
@@ -290,7 +290,7 @@ else:
                             st.session_state['error'] = "生成的短文案不是有效的JSON格式。"
                             st.session_state['short_content'] = short_content
 
-            if st.button("生成长文案", key="generate_long_content"):
+            if st.button("Generate Long Copy", key="generate_long_content"):
                 if 'generated_content' not in st.session_state or not st.session_state['generated_content'] or 'short_content' not in st.session_state or not st.session_state['short_content']:
                     st.session_state['error'] = "请先点击“生成卖点”和“生成短文案”按钮生成卖点和短文案。长文案生成依赖卖点和短文案"
                 else:
@@ -319,7 +319,7 @@ else:
                             st.session_state['error'] = "生成的长文案不是有效的JSON格式。"
                             st.session_state['long_content'] = long_content
 
-            if st.button("生成推广文", key="generate_promotion_content"):
+            if st.button("Generate Promotion Copy", key="generate_promotion_content"):
                 if 'generated_content' not in st.session_state or not st.session_state['generated_content'] or 'short_content' not in st.session_state or not st.session_state['short_content']:
                         st.session_state['error'] = "请先点击“生成卖点”和“ 生成短文案”按钮生成卖点和短文案。推广文生成依赖卖点和短文案"
                 else:
@@ -347,7 +347,7 @@ else:
                             st.session_state['error'] = "生成的推广文案不是有效的JSON格式。"
                             st.session_state['promotion_content'] = promotion_content
 
-            if st.button("生成长标题", key="generate_long_title_content"):
+            if st.button("Generate Long Title", key="generate_long_title_content"):
                 if 'generated_content' not in st.session_state or not st.session_state['generated_content'] or 'short_content' not in st.session_state or not st.session_state['short_content']:
                         st.session_state['error'] = "请先点击“生成卖点”和“ 生成短文案”按钮生成卖点和短文案。长标题生成依赖卖点和短文案"
                 else:
@@ -375,7 +375,7 @@ else:
                             st.session_state['error'] = "生成的长标题输出不是有效的JSON格式。"
                             st.session_state['long_title_content'] = long_title_content
                             
-            if st.button("商详页框架", key="generate_product_detail_page"):
+            if st.button("Generate Product Detail Page", key="generate_product_detail_page"):
                 if 'generated_content' not in st.session_state or not st.session_state['generated_content'] or 'short_content' not in st.session_state or not st.session_state['short_content']:
                     st.session_state['error'] = "请先点击“生成卖点”和“生成短文案”按钮生成卖点和短文案。商详页框架生成依赖卖点和短文案"
                 else:
@@ -406,12 +406,12 @@ else:
        
 
         with col3:
-            if st.button("全部清空", key="clear_all"):
+            if st.button("Clear All", key="clear_all"):
                 keys_to_clear = ['generated_content', 'optimized_content', 'short_content', 'long_content', 'error', 'optimized_reason', 'review_result', 'long_title_content', 'product_detail_page_content', 'promotion_content']
                 for key in keys_to_clear:
                     if key in st.session_state:
                         del st.session_state[key]
-            if st.button("历史纪录", key="view_history"):
+            if st.button("View History", key="view_history"):
                 st.session_state['show_history_modal'] = True
 
     if 'show_history_modal' in st.session_state and st.session_state['show_history_modal']:
