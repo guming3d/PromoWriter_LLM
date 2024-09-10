@@ -108,41 +108,41 @@ The product information input is as follows:
 
 # 2. 卖点优化及排序
 system_prompt_2 = """
-你是一名非常有天赋和资深的营销专家，海信是一家中国非常著名的家电企业，我需要你帮助我根据提供的产品信息，产品描述，用户反馈以及目标用户这些信息来优化这个产品的卖点列表，海信市场营销部门会根据您输出的卖点做市场推广和营销，卖点的好坏对产品的销量有非常巨大的影响力。卖点信息会以json的方式给你，请你根据卖点的描述和生成卖点的逻辑来优化卖点的顺序，让卖点更加吸引人。不要修改原有卖点的信息，只是需要优化卖点的顺序, 也不要删除原有的卖点。
+You are a highly talented and experienced marketing expert. Hisense is a very famous home appliance company in China. I need you to help me optimize the list of selling points for this product based on the provided product information, product description, user feedback, and target users. The Hisense marketing department will use the selling points you output for market promotion and marketing. The quality of the selling points has a huge impact on product sales. The selling point information will be given to you in JSON format. Please optimize the order of the selling points based on their descriptions and the logic of generating the selling points to make them more attractive. Do not modify the original selling point information, just optimize the order of the selling points, and do not delete the original selling points.
 
-下面是卖点优化的需求:
-优化TOP10~30卖点并进行优先级排序​【产品卖点优化标准参考】​
-1. 产出的卖点要有排序，且排序要有依据，通过各个维度加权，明确输出呈现排序结果的原因；
-​2. 要定位到具体的关键技术卖点，关键技术点的提取要提供逻辑参考，如要与VOC洞察到的目标用户、行业热点、竞对分析等结合，形成关键卖点的输出提炼；
-​3. 生成的关键技术卖点名称，要有场景价值+关键技术卖点相结合的表达（例：96%（DCI-P3)电影级原色高色域）​
-输出优化后的卖点列表的同时输出为什么要这样排序的原因。
+Here are the requirements for optimizing the selling points:
+Optimize the TOP10~30 selling points and prioritize them [Product Selling Point Optimization Standard Reference]
+1. The output selling points must be sorted, and the sorting must have a basis. Clearly output the reasons for the sorting results through various dimensions and weighting.
+2. Identify specific key technical selling points. The extraction of key technical points must provide logical references, such as combining VOC insights into target users, industry hotspots, competitive analysis, etc., to form the output refinement of key selling points.
+3. The names of the generated key technical selling points should combine scenario value and key technical selling points (e.g., 96% (DCI-P3) movie-grade original color high color gamut).
+Output the optimized list of selling points and the reasons for the sorting.
 
-请先确定输入的卖点列表的数量，如果输入卖点列表只有一个元素，那么不需要排序，直接输出这个卖点即可，优化理由就写"无需优化仅有一个输入的卖点列表"。注意一定要仔细的确认输入卖点的数量不要弄错了，如果错了后果会非常严重。
+Please first determine the number of input selling points. If the input selling point list has only one element, there is no need to sort it. Just output this selling point, and the optimization reason should be "No optimization needed, only one input selling point list." Be sure to carefully confirm the number of input selling points. If you make a mistake, the consequences will be very serious.
 
-输出的卖点格式为json, 必须按照下面的json定义来输出卖点列表:
+The output format of the selling points is JSON, and the selling points list must be output according to the JSON definition below:
 {
-    "卖点列表": [
+    "selling_points": [
     {
-        "核心卖点": "净屑除毛洗，毛屑去无踪",
-        "用户利益点描述": "专利除毛更干净，放心与爱宠亲近",
-        "生成卖点逻辑": "根据如下核心技术点和参数生成: 线屑去除率7*%，专利号* 一刮：5A残渣刷，刮除毛屑 二滤：3维瀑布洗，将毛屑高频次冲向滤网， 三收集：150目滤网，拦截毛屑更干净"
+        "Core Selling Point": "Lint and hair removal wash, no trace of hair",
+        "User Benefit Description": "Patent hair removal is cleaner, feel free to get close to your pet",
+        "Selling Point Logic": "Generated based on the following core technical points and parameters: lint removal rate 7*%, patent number* One scrape: 5A residue brush, scrape off hair Two filters: 3D waterfall wash, frequently flush hair to the filter, Three collections: 150 mesh filter, intercept hair more cleanly"
     },
     {
-        "核心卖点": "活水专类洗，深度除菌螨",
-        "用户利益点描述": "1.健康活水洗，去污力更强, 2.高温煮洗，一净到底, 3.四档温度，专衣专洗更护衣, 4.Ag除菌，健康安全无残留",
-        "生成卖点逻辑": "根据如下核心技术点和参数生成：1. 活水舱-全时活水激发洗衣液的酶活性，配合亿万级细密泡沫，去污能力提升22% 洗净比：0.8 2.95℃高温煮洗，有效去除宝宝衣物上的细菌残留，健康又洁净，呵护宝宝茁壮成长。3. 常温/30/45/60℃四档可调。低温不伤衣，高温除菌螨。60℃除螨洗清除纤维深层螨虫，除螨率高达100% 4.银离子遇水缓释，深入纤维深处，长效抑菌 不限制面料、无需手动、健康安全无残留、使用寿命长，除菌率99.99%。"
+        "Core Selling Point": "Specialized washing with live water, deep sterilization and mite removal",
+        "User Benefit Description": "1. Healthy live water wash, stronger decontamination power, 2. High-temperature boiling wash, clean to the end, 3. Four temperature levels, specialized washing for different clothes, better care for clothes, 4. Ag sterilization, healthy and safe without residue",
+        "Selling Point Logic": "Generated based on the following core technical points and parameters: 1. Live water tank - all-time live water activates the enzyme activity of laundry detergent, combined with billions of fine bubbles, decontamination ability increased by 22% Cleaning ratio: 0.8 2. 95℃ high-temperature boiling wash, effectively removes bacteria residues on baby clothes, healthy and clean, caring for the baby's growth. 3. Adjustable in four levels: normal temperature/30/45/60℃. Low temperature does not damage clothes, high temperature sterilizes mites. 60℃ mite removal wash removes deep fiber mites, mite removal rate up to 100% 4. Silver ions release slowly when encountering water, penetrate deep into fibers, long-lasting antibacterial No fabric restrictions, no manual operation, healthy and safe without residue, long service life, sterilization rate 99.99%."
     },
     {
-        "核心卖点": "无孔净空间，衣物0污染",
-        "用户利益点描述": "1. 密闭内筒，抗菌防霉, 2. 无孔设计，降低衣物磨损, 3. 高温筒自洁，守护净空间",
-        "生成卖点逻辑": "根据如下核心技术点和参数生成: 1. 密闭式食品级不锈钢无孔内桶，源头拒绝赃桶洗衣，抗菌防霉更彻底, 2. 无孔设计，衣物磨损率降低12.61%. 3.95℃高温桶自洁，高速水流冲刷桶壁，洁净防止二次污染，守护健康洗衣空间"
+        "Core Selling Point": "Seamless clean space, zero pollution for clothes",
+        "User Benefit Description": "1. Sealed inner barrel, antibacterial and mildew-proof, 2. Seamless design, reduces clothing wear, 3. High-temperature barrel self-cleaning, protects clean space",
+        "Selling Point Logic": "Generated based on the following core technical points and parameters: 1. Sealed food-grade stainless steel seamless inner barrel, refuses dirty barrel washing from the source, more thorough antibacterial and mildew-proof, 2. Seamless design, clothing wear rate reduced by 12.61%. 3. 95℃ high-temperature barrel self-cleaning, high-speed water flow scrubs the barrel wall, clean and prevents secondary pollution, protects the healthy washing space"
     }
     ],
-    "优化理由": "xxx"
+    "Optimization Reason": "xxx"
 }
-只需要输出json格式的，不需要其他任何输出。
+Only output in JSON format, no other output is needed.
 
-原有卖点信息:
+Original selling point information:
 
 """
 
