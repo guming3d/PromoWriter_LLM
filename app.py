@@ -12,7 +12,7 @@ with open("images/Microsoft_Azure.svg", "r") as f:
 
 
 st.set_page_config(
-    page_title="海信国内营销AI文案生成平台",
+    page_title="Hisense Domestic Marketing AI Copywriting Generation Platform",
     page_icon="images/azure.png",
     layout="wide",  # You can also choose 'wide'
 )
@@ -24,18 +24,18 @@ if not env_valid:
 else:
     # Left column - Input section
     with st.sidebar:
-        st.markdown("<h1 style='color: #00008B;'>海信营销文案生成</h1>", unsafe_allow_html=True)
+        st.markdown("<h1 style='color: #00008B;'>Hisense Marketing Copy Generation</h1>", unsafe_allow_html=True)
         col1, col2 = st.columns([1, 5])
         with col1:
             st.logo(azure_logo)
-        st.header("信息输入区")
+        st.header("Information Input Area")
 
         # Product Information input
-        st.subheader("产品信息")
+        st.subheader("Product Information")
         
-        product_name = st.text_input("产品名称", "海信小哈利洗衣机")
+        product_name = st.text_input("Product Name", "Hisense Little Harry Washing Machine")
         
-        competitor_info = st.text_input('竞品信息', '竞品信息')
+        competitor_info = st.text_input('Competitor Information', 'Competitor Information')
 
         product_description_default_backup = """产品概述
 品牌: 海信 (Hisense)
@@ -88,63 +88,63 @@ else:
         
         """
         
-        product_description = st.text_area("产品描述", product_description_default, max_chars=1280)
+        product_description = st.text_area("Product Description", product_description_default, max_chars=1280)
 
         # User Comments
-        st.subheader("用户评论")
-        use_comments = st.checkbox("是否添加用户评论")
+        st.subheader("User Comments")
+        use_comments = st.checkbox("Add User Comments")
         user_comments = ""
         if use_comments:
-            comment_input_method = st.radio("选择输入方式", ("手动输入", "从文件上传"))
-            if comment_input_method == "手动输入":
-                user_comments = st.text_area("用户评论", "", max_chars=2048)
+            comment_input_method = st.radio("Select Input Method", ("Manual Input", "Upload from File"))
+            if comment_input_method == "Manual Input":
+                user_comments = st.text_area("User Comments", "", max_chars=2048)
             else:
-                uploaded_file = st.file_uploader("上传用户评论 JSON 文件", type="json")
+                uploaded_file = st.file_uploader("Upload User Comments JSON File", type="json")
                 if uploaded_file is not None:
                     user_comments = json.load(uploaded_file)
                     user_comments = json.dumps(user_comments, ensure_ascii=False, indent=4)
         
-        st.subheader("目标用户特征")
+        st.subheader("Target User Characteristics")
         
-        target_user_type = st.radio("目标用户", ("不限", "自定义用户"))
+        target_user_type = st.radio("Target User", ("Unlimited", "Custom User"))
         
-        if target_user_type == "自定义用户":
+        if target_user_type == "Custom User":
             
             # User Groups
-            st.write("人群圈层")
+            st.write("User Groups")
             user_groups = st.multiselect(
-                "选择人群圈层", 
-                ["游戏圈层", "科技圈层", "家装圈层", "体育圈层","精致妈妈","萌宠人群","年龄段18-24岁","年龄段24-35岁","年龄段35-45岁","年龄段45-55岁","年龄段55岁以上"],
-                ["体育圈层"]
+                "Select User Groups", 
+                ["Gaming Circle", "Tech Circle", "Home Improvement Circle", "Sports Circle","Exquisite Moms","Pet Owners","Age Group 18-24","Age Group 24-35","Age Group 35-45","Age Group 45-55","Age Group 55+"],
+                ["Sports Circle"]
             )
             
             # Gender Selection
-            st.write("性别")
-            gender = st.radio("", ["不限", "男", "女"])
+            st.write("Gender")
+            gender = st.radio("", ["Unlimited", "Male", "Female"])
             
             # User Traits
-            st.write("人群特征")
-            user_traits = st.text_input("请选择标签", "")
-        elif target_user_type == "不限":
+            st.write("User Traits")
+            user_traits = st.text_input("Select Tags", "")
+        elif target_user_type == "Unlimited":
             user_groups = []
             gender = "不限"
             user_traits = ""
         
         # Generate Number
-        st.write("生成数量")
-        generate_number = st.slider("生成数量", 1, 6, 3)
+        st.write("Generate Number")
+        generate_number = st.slider("Generate Number", 1, 6, 3)
         
         # Usage Scenarios
-        st.write("使用场景")
-        default_usage_scenarios = """1. 当养宠家庭有了宝宝，宝宝衣物手洗无法去除毛屑，宝宝衣物和床上宠物毛难清理；
-2. 大人孩子衣服分开洗，拒绝交叉感染；
-3. 孩子衣服上沾染食物残渣，普通洗衣机洗完仍有污渍残留。
-4. 床品和衣物螨虫容易引起宝宝和家人敏感。
-5. 贴身衣物单独洗，呵护私密健康；
+        st.write("Usage Scenarios")
+        default_usage_scenarios = """1. When a pet-owning family has a baby, hand washing baby clothes cannot remove pet hair, and pet hair on baby clothes and bedding is difficult to clean;
+2. Separate washing of adult and children's clothes to avoid cross-infection;
+3. Food residues on children's clothes, ordinary washing machines still leave stains after washing.
+4. Bed linens and clothes mites can easily cause sensitivity in babies and family members.
+5. Separate washing of intimate clothing to protect private health;
 """
-        usage_scenarios = st.text_area("请输入使用场景", default_usage_scenarios, max_chars=1024)
-        st.write("附加描述")
-        additional_description = st.text_area("请输入", "", max_chars=500)
+        usage_scenarios = st.text_area("Enter Usage Scenarios", default_usage_scenarios, max_chars=1024)
+        st.write("Additional Description")
+        additional_description = st.text_area("Enter", "", max_chars=500)
 
         # Convert collected data to user input string
         user_comments_str = f"{user_comments}\n" if use_comments else ""
@@ -415,7 +415,7 @@ else:
                 st.session_state['show_history_modal'] = True
 
     if 'show_history_modal' in st.session_state and st.session_state['show_history_modal']:
-        modal = Modal(key="history_modal", title="历史纪录")
+        modal = Modal(key="history_modal", title="History Records")
         with modal.container():
             with open("history.md", "r", encoding="utf-8") as f:
                 history_content = f.read()
@@ -429,7 +429,7 @@ else:
             )
         st.session_state['show_history_modal'] = False
 
-    st.title("内容生成区")
+    st.title("Content Generation Area")
     st.logo(azure_logo)
     
     # Retrieve generated content from session state
@@ -439,11 +439,11 @@ else:
     if 'generated_content' in st.session_state:
         selling_points = st.session_state['generated_content']
         if 'generated_content' in st.session_state:
-            st.subheader("卖点：")
+            st.subheader("Selling Points:")
             with st.container(border=True):
                 st.write(st.session_state['generated_content'])
                 # Add expandable container for system_prompt and user_input
-                with st.expander("查看系统提示和用户输入"):
+                with st.expander("View System Prompt and User Input"):
                     st.markdown(
                         """
                         <div style="color: #5F9EA0;">
@@ -461,12 +461,12 @@ else:
 
         if 'short_content' in st.session_state:
             st.write("---")
-            st.subheader("短文案：")
+            st.subheader("Short Copy:")
             short_content = st.session_state['short_content']
             with st.container(border=True):
                 st.write(st.session_state['short_content'])
                 # Add expandable container for system_prompt and user_input
-                with st.expander("查看系统提示和用户输入"):
+                with st.expander("View System Prompt and User Input"):
                     st.markdown(
                         """
                         <div style="color: #5F9EA0;">
@@ -484,11 +484,11 @@ else:
 
         if 'long_content' in st.session_state:
             st.write("---")
-            st.subheader("长文案：")
+            st.subheader("Long Copy:")
             with st.container(border=True):
                 st.write(st.session_state['long_content'])
                 # Add expandable container for system_prompt and user_input
-                with st.expander("查看系统提示和用户输入"):
+                with st.expander("View System Prompt and User Input"):
                     st.markdown(
                         """
                         <div style="color: #5F9EA0;">
@@ -506,11 +506,11 @@ else:
 
         if 'promotion_content' in st.session_state:
             st.write("---")
-            st.subheader("推广文：")
+            st.subheader("Promotion Copy:")
             with st.container(border=True):
                 st.write(st.session_state['promotion_content'])
                 # Add expandable container for system_prompt and user_input
-                with st.expander("查看系统提示和用户输入"):
+                with st.expander("View System Prompt and User Input"):
                     st.markdown(
                         """
                         <div style="color: #5F9EA0;">
@@ -528,15 +528,15 @@ else:
 
         if 'optimized_content' in st.session_state:
             st.write("---")
-            st.subheader("卖点顺序优化：")
+            st.subheader("Selling Points Order Optimization:")
             with st.container(border=True):
-                st.write("原始卖点：")
+                st.write("Original Selling Points:")
                 st.write(selling_points)
-                st.write("优化后的卖点：")
+                st.write("Optimized Selling Points:")
                 st.write(st.session_state['optimized_content'])
-                st.write("优化理由:")
+                st.write("Optimization Reason:")
                 st.write(st.session_state['optimized_reason'])
-                with st.expander("查看系统提示和用户输入"):
+                with st.expander("View System Prompt and User Input"):
                     st.markdown(
                         """
                         <div style="color: #5F9EA0;">
@@ -554,13 +554,13 @@ else:
 
         if 'review_result' in st.session_state:
             st.write("---")
-            st.subheader("卖点评审：")
+            st.subheader("Selling Points Review:")
             with st.container(border=True):
-                st.write("原始卖点：")
+                st.write("Original Selling Points:")
                 st.write(selling_points)
-                st.write("评审结果")
+                st.write("Review Results")
                 st.write(st.session_state['review_result'])
-                with st.expander("查看系统提示和用户输入"):
+                with st.expander("View System Prompt and User Input"):
                     st.markdown(
                         """
                         <div style="color: #5F9EA0;">
@@ -577,11 +577,11 @@ else:
                     )
         if 'long_title_content' in st.session_state:
             st.write("---")
-            st.subheader("长标题：")
+            st.subheader("Long Title:")
             with st.container(border=True):
                 st.write(st.session_state['long_title_content'])
                 # Add expandable container for system_prompt and user_input
-                with st.expander("查看系统提示和用户输入"):
+                with st.expander("View System Prompt and User Input"):
                     st.markdown(
                         """
                         <div style="color: #5F9EA0;">
@@ -599,11 +599,11 @@ else:
         
         if 'product_detail_page_content' in st.session_state:
             st.write("---")
-            st.subheader("商详页框架：")
+            st.subheader("Product Detail Page Framework:")
             with st.container(border=True):
                 st.write(st.session_state['product_detail_page_content'])
                 # Add expandable container for system_prompt and user_input
-                with st.expander("查看系统提示和用户输入"):
+                with st.expander("View System Prompt and User Input"):
                     st.markdown(
                         """
                         <div style="color: #5F9EA0;">
