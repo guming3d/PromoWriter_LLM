@@ -187,7 +187,7 @@ Core Technical Points/Specifications:
 
         system_prompt = generate_system_prompt_selling_point(generate_number)
         with col1:
-            if st.button("Generate Selling Points", key="generate_content"):
+            if st.button("Selling Points", key="generate_content"):
                 if not product_name or not product_description.strip():
                     st.session_state['error'] = "The product name and product description cannot be empty. Please enter the product name and product description."
                 else:
@@ -250,7 +250,7 @@ Core Technical Points/Specifications:
 
 
         with col2:
-            if st.button("Generate Short Copy", key="generate_short_content"):
+            if st.button("Short Copy", key="generate_short_content"):
                 if 'generated_content' not in st.session_state or not st.session_state['generated_content']:
                     st.session_state['error'] = "Please click the 'Generate Selling Points' button to generate selling points first."
                 else:
@@ -275,7 +275,7 @@ Core Technical Points/Specifications:
                             st.session_state['error'] = "The generated short copy is not a valid JSON format."
                             st.session_state['short_content'] = short_content
 
-            if st.button("Generate Long Copy", key="generate_long_content"):
+            if st.button("Long Copy", key="generate_long_content"):
                 if 'generated_content' not in st.session_state or not st.session_state['generated_content'] or 'short_content' not in st.session_state or not st.session_state['short_content']:
                     st.session_state['error'] = "Please click the 'Generate Selling Points' and 'Generate Short Copy' buttons to generate selling points and short copy. Generating long copy depends on selling points and short copy."
                 else:
@@ -304,7 +304,7 @@ Core Technical Points/Specifications:
                             st.session_state['error'] = "The generated long copy is not a valid JSON format."
                             st.session_state['long_content'] = long_content
 
-            if st.button("Generate Promotion Copy", key="generate_promotion_content"):
+            if st.button("Promotion Copy", key="generate_promotion_content"):
                 if 'generated_content' not in st.session_state or not st.session_state['generated_content'] or 'short_content' not in st.session_state or not st.session_state['short_content']:
                         st.session_state['error'] = "Please click the 'Generate Selling Points' and 'Generate Short Copy' buttons to generate selling points and short copy. Generating promotion copy depends on selling points and short copy."
                 else:
@@ -332,7 +332,7 @@ Core Technical Points/Specifications:
                             st.session_state['error'] = "The generated promotion copy is not a valid JSON format."
                             st.session_state['promotion_content'] = promotion_content
 
-            if st.button("Generate Long Title", key="generate_long_title_content"):
+            if st.button("Long Title", key="generate_long_title_content"):
                 if 'generated_content' not in st.session_state or not st.session_state['generated_content'] or 'short_content' not in st.session_state or not st.session_state['short_content']:
                         st.session_state['error'] = "Please click the 'Generate Selling Points' and 'Generate Short Copy' buttons to generate selling points and short copy. Generating long title depends on selling points and short copy."
                 else:
@@ -360,7 +360,7 @@ Core Technical Points/Specifications:
                             st.session_state['error'] = "The generated long title is not a valid JSON format."
                             st.session_state['long_title_content'] = long_title_content
                             
-            if st.button("Generate Product Detail Page", key="generate_product_detail_page"):
+            if st.button("Product Detail Page", key="generate_product_detail_page"):
                 if 'generated_content' not in st.session_state or not st.session_state['generated_content'] or 'short_content' not in st.session_state or not st.session_state['short_content']:
                     st.session_state['error'] = "Please click the 'Generate Selling Points' and 'Generate Short Copy' buttons to generate selling points and short copy. Generating product detail page depends on selling points and short copy."
                 else:
