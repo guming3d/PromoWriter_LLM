@@ -80,7 +80,7 @@ Through simple and clear expression, emphasizes the high efficiency of the produ
 
 The success of these advertising slogans in the Chinese market lies not only in their conciseness and memorability but also in their ability to accurately grasp consumers' emotions and needs. These successful cases can provide valuable references for you when generating product selling points.
 
-The output format of the selling points is JSON, and the selling points list must be output according to the format defined below. Please ensure that the number of generated selling points is no less than {selling_point_number}. Do not repeat the sample content below in the output:
+The output format of the selling points is JSON, and the selling points list must be output according to the format defined below. Please ensure that the number of generated selling points is no less than {selling_point_number}. Do not repeat the sample content below in the output and make sure the output is in English:
 ```json
 [
     {{
@@ -131,7 +131,7 @@ The output format of the selling points is JSON, and the selling points list mus
     ],
     "Optimization Reason": "xxx"
 }
-Only output in JSON format, no other output is needed.
+Only output in JSON format in English, no other output is needed.
 
 Original selling point information:
 
@@ -158,7 +158,7 @@ Each short copy should be brief and creative, ensuring it quickly captures the c
     ...
 ]
 ```
-Please generate short copy that meets the above requirements based on the provided selling points:
+Please generate short copy in English that meets the above requirements based on the provided selling points:
 
 Input selling points are as follows:
 """
@@ -175,7 +175,7 @@ Review Criteria:
 4. **Core Advantage Communication**: Analyze whether the selling point clearly conveys the product's core advantages and direct benefits to users.
 5. **Target User Fit**: Evaluate whether the selling point meets the actual needs and psychological expectations of the target users.
 
-Please record your review results in the following JSON format, and each selling point should explain the review reasons and specific improvement suggestions in detail:
+Please record your review results in the following JSON format in English, and each selling point should explain the review reasons and specific improvement suggestions in detail:
 
 ```json
 {
@@ -220,7 +220,7 @@ Each long copy should be detailed and creative, ensuring effective communication
 }
 ```
 
-Please generate a long copy that meets the above requirements based on the provided selling points and short copy, ensuring the copy is both attractive and suitable for actual market promotion needs.
+Please generate a long copy in English that meets the above requirements based on the provided selling points and short copy, ensuring the copy is both attractive and suitable for actual market promotion needs.
 
 Input selling points and short copy information are as follows:
 """
@@ -324,7 +324,7 @@ Each promotional copy should be detailed and creative, ensuring that it effectiv
 }
 ```
 
-Please generate promotional copy based on the provided selling points and short copy, ensuring that the copy is both attractive and meets the actual needs of market promotion.
+Please generate promotional copy in English based on the provided selling points and short copy, ensuring that the copy is both attractive and meets the actual needs of market promotion.
 
 The input selling points and short copy information are as follows:
 """
@@ -413,7 +413,7 @@ Each long title should be detailed and creative, ensuring effective communicatio
     ]
 }
 ```
-Please generate long titles that meet the above requirements based on the provided selling points and short copy, ensuring the titles are both attractive and suitable for actual market promotion needs.
+Please generate long titles in English that meet the above requirements based on the provided selling points and short copy, ensuring the titles are both attractive and suitable for actual market promotion needs.
 
 Input selling points and short copy information are as follows:
 """
@@ -444,7 +444,7 @@ Each product detail page framework should be detailed and creative, ensuring eff
     ]
 }
 ```
-Please generate a product detail page framework that meets the above requirements based on the provided selling points and short copy, ensuring the framework is both attractive and suitable for actual market promotion needs.
+Please generate a product detail page framework in English that meets the above requirements based on the provided selling points and short copy, ensuring the framework is both attractive and suitable for actual market promotion needs.
 
 Input selling points and short copy information are as follows:
 """
