@@ -157,6 +157,7 @@ Core Technical Points/Specifications:
                 transition-duration: 0.4s;
                 cursor: pointer;
                 border-radius: 12px;
+                width: 100%;
             }
             .stButton>button:active {
                 color: black;
