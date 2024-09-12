@@ -171,7 +171,7 @@ Core Technical Points/Specifications:
             unsafe_allow_html=True
         )
 
-        col1, col2, col3 = st.columns(3)
+        col1, col2 = st.columns(2)
 
         def log_to_markdown(action, output):
             timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -388,9 +388,8 @@ Core Technical Points/Specifications:
                             st.session_state['error'] = "The generated product detail page is not a valid JSON format."
                             print(f"Failed to parse response_json, input:{product_detail_page_content}")
                             st.session_state['product_detail_page_content'] = product_detail_page_content
-       
-
-        with col3:
+        with col2:
+            st.write("---")
             if st.button("Clear All", key="clear_all"):
                 keys_to_clear = ['generated_content', 'optimized_content', 'short_content', 'long_content', 'error', 'optimized_reason', 'review_result', 'long_title_content', 'product_detail_page_content', 'promotion_content']
                 for key in keys_to_clear:
