@@ -1,61 +1,61 @@
-# 营销文案生成器
+# Marketing Copy Generator
 
-这是一个基于Streamlit的应用程序，用于生成和优化营销文案。用户可以输入产品信息、目标用户特征等，生成独特的卖点和文案。
+This is a Streamlit-based application for generating and optimizing marketing copy. Users can input product information, target user characteristics, etc., to generate unique selling points and copy.
 
-## 安装指南
+## Installation Guide
 
-请按照以下步骤安装和运行此项目：
+Please follow these steps to install and run this project:
 
 
 
-### 1. 创建虚拟环境
+### 1. Create a Virtual Environment
 
-建议使用Python虚拟环境来隔离项目依赖：
+It is recommended to use a Python virtual environment to isolate project dependencies:
 
 ```bash
 cd <your-repo-directory>
 python3 -m venv venv
-source venv/bin/activate  # 对于Windows用户，使用 `venv\Scripts\activate`
+source venv/bin/activate  # For Windows users, use `venv\Scripts\activate`
 ```
 
-### 2. 安装依赖
+### 2. Install Dependencies
 
-使用pip安装项目所需的依赖：
+Use pip to install the required project dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. 配置环境变量
+### 3. Configure Environment Variables
 
-创建一个`.env`文件，并添加以下内容：
+Create a `.env` file and add the following content:
 
 ```plaintext
-AZURE_OPENAI_ENDPOINT=<your_azure_openai_endpoint> #比如:https://minggu-aoai.openai.azure.com
-AZURE_OPENAI_DEPLOYMENT_NAME=<your_azure_openai_deployment_name> #比如:gpt-4o
-AZURE_OPENAI_API_KEY=<your_azure_openai_api_key> #比如: xxxx8186851d94efeb0d13fcxxxxxxxxxx
+AZURE_OPENAI_ENDPOINT=<your_azure_openai_endpoint> # e.g., https://minggu-aoai.openai.azure.com
+AZURE_OPENAI_DEPLOYMENT_NAME=<your_azure_openai_deployment_name> # e.g., gpt-4o
+AZURE_OPENAI_API_KEY=<your_azure_openai_api_key> # e.g., xxxx8186851d94efeb0d13fcxxxxxxxxxx
 ```
 
-### 4. 运行应用程序
+### 4. Run the Application
 
-使用Streamlit运行应用程序：
+Use Streamlit to run the application:
 
 ```bash
 streamlit run app.py
 ```
 
-打开浏览器并访问 `http://localhost:8501` 查看应用程序。
+Open a browser and visit `http://localhost:8501` to view the application.
 
-### 5. 按钮功能说明
+### 5. Button Function Descriptions
 
-应用程序中包含以下按钮，每个按钮都有特定的功能：
+The application includes the following buttons, each with a specific function:
 
-- **生成卖点**: 基于输入的产品信息和用户特征生成产品卖点。
-- **顺序优化**: 对生成的卖点进行优化排序。
-- **卖点评审**: 对生成的卖点进行评审并提供改进建议。
-- **生成短文案**: 基于生成的卖点生成吸引用户的短文案。
-- **生成长文案**: 基于生成的卖点和短文案生成详细的长文案。
-- **生成推广文**: 基于生成的卖点和短文案生成推广文案。
-- **生成长标题**: 基于生成的卖点和短文案生成吸引用户的长标题。
-- **商详页框架**: 基于生成的卖点和短文案生成详细的商详页框架。
-- **全部清空**: 清空所有生成的内容和错误信息。
+- **Generate Selling Points**: Generate product selling points based on the input product information and user characteristics.
+- **Optimize Order**: Optimize the order of the generated selling points.
+- **Review Selling Points**: Review the generated selling points and provide improvement suggestions.
+- **Generate Short Copy**: Generate short copy to attract users based on the generated selling points.
+- **Generate Long Copy**: Generate detailed long copy based on the generated selling points and short copy.
+- **Generate Promotional Copy**: Generate promotional copy based on the generated selling points and short copy.
+- **Generate Long Title**: Generate a long title to attract users based on the generated selling points and short copy.
+- **Detailed Page Framework**: Generate a detailed page framework based on the generated selling points and short copy.
+- **Clear All**: Clear all generated content and error messages.
