@@ -175,10 +175,11 @@ Core Technical Points/Specifications:
 
         def log_to_markdown(action, output):
             timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            with open("history.md", "a", encoding="utf-8") as f:
-                # f.write(f"## {timestamp}\n")
-                f.write(f"## {timestamp}  {action}\n\n")
-                f.write(f"**Output:**\n```json\n{json.dumps(output, ensure_ascii=False, indent=4)}\n```\n\n")
+            with open("history.md", "r", encoding="utf-8") as f:
+                existing_content = f.read()
+            new_log = f"## {timestamp}  {action}\n\n**Output:**\n```json\n{json.dumps(output, ensure_ascii=False, indent=4)}\n```\n\n"
+            with open("history.md", "w", encoding="utf-8") as f:
+                f.write(new_log + existing_content)
 
         system_prompt = generate_system_prompt_selling_point(generate_number)
         with col1:
