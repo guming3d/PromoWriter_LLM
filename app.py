@@ -175,6 +175,10 @@ Core Technical Points/Specifications:
 
         def log_to_markdown(action, output):
             timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            import os
+            if not os.path.exists("history.md"):
+                with open("history.md", "w", encoding="utf-8") as f:
+                    f.write("")
             with open("history.md", "r", encoding="utf-8") as f:
                 existing_content = f.read()
             new_log = f"## {timestamp}  {action}\n\n**Output:**\n```json\n{json.dumps(output, ensure_ascii=False, indent=4)}\n```\n\n"
