@@ -1,4 +1,4 @@
-# Marketing Copy Generator
+# AI based marketing content  generator
 
 ![AI Marketing Generator Screenshot](images/screenshot_AI_marketing_generator.jpeg)
 
