@@ -1,5 +1,7 @@
 # Marketing Copy Generator
 
+![AI Marketing Generator Screenshot](images/screenshot_AI_marketing_generator.jpeg)
+
 This is a Streamlit-based application for generating and optimizing marketing copy. Users can input product information, target user characteristics, etc., to generate unique selling points and copy.
 
 ## Installation Guide
