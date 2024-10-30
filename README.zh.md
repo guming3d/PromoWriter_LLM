@@ -1,5 +1,7 @@
 # 营销文案生成器
 
+![AI Marketing Generator Screenshot](images/screenshot_AI_marketing_generator.jpeg)
+
 这是一个基于Streamlit的应用程序，用于生成和优化营销文案。用户可以输入产品信息、目标用户特征等，生成独特的卖点和文案。
 
 ## 安装指南
